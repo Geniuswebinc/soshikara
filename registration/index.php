@@ -1,3 +1,20 @@
+<?php
+    require_once dirname(__FILE__) .'./../data/require.php';
+
+    $informations_mail=$_GET['informations_mail'];
+    $password=$_GET['password'];
+    $informations_name=$_GET['informations_name'];
+
+    $conn = new DbConn();
+
+    if($informations_mail){
+    $sql  = 'INSERT INTO informations(informations_mail,password,informations_name)';
+    $sql .= '   VALUES("'.$informations_mail.'","'.$password.'","'.$informations_name.'")';
+    }
+
+    $conn->execute($sql);
+
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -41,19 +58,21 @@
             <div class="box login">
                 <div class="login">
                     <h3>会員登録</h3>
-                    <div class="form-group">
-                        <label for="InputEmail">メールアドレス</label>
-                        <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。">
-                    </div>
-                    <div class="form-group">
-                        <label for="InputPassword">パスワード</label>
-                        <input type="password" class="form-control" id="InputPassword" placeholder="パスワードを入力して下さい。">
-                    </div>
-                    <div class="form-group">
-                        <label for="InputName">ニックネーム</label>
-                        <input type="text" class="form-control" id="InputName" placeholder="ニックネームを入力して下さい。">
-                    </div>
-                    <div class="text-center"><input type="submit" value="会員登録" class="btn btn-success"></div>
+                    <form method="get">
+                        <div class="form-group">
+                            <label for="InputEmail">メールアドレス</label>
+                            <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。" name="informations_mail">
+                        </div>
+                        <div class="form-group">
+                            <label for="InputPassword">パスワード</label>
+                            <input type="password" class="form-control" id="InputPassword" placeholder="パスワードを入力して下さい。" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="InputName">ニックネーム</label>
+                            <input type="text" class="form-control" id="InputName" placeholder="ニックネームを入力して下さい。" name="informations_name">
+                        </div>
+                        <div class="text-center"><input type="submit" value="会員登録" class="btn btn-success"></div>
+                    </form>
                 </div>
             </div>
         </div>
