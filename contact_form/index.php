@@ -38,19 +38,21 @@
 
                     <form>
                         <div class="form-group">
-                            <label for="InputName">お名前</label>
-                            <input type="user_name" class="form-control" id="InputName" placeholder="名前を入力して下さい。">
-                        </div>
-                        <div class="form-group">
-                            <label for="InputEmail">メールアドレス</label>
-                            <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。">
-                        </div>
-                        <div class="from-group">
-                            <label for="InputTextarea">内容</label>
-                            <textarea class="form-control" name="content" id="InputTextarea" placeholder="内容を入力して下さい。"></textarea>
-                        </div>
-                        <div class="confirm text-center">
-                            <input type="submit" value="確認" class="btn btn-success">
+                            <div class="txtbox">
+                                <label for="InputName">お名前</label>
+                                <input type="user_name" class="form-control" id="InputName" placeholder="名前を入力して下さい。">
+                            </div>
+                            <div class="txtbox">
+                                <label for="InputEmail">メールアドレス</label>
+                                <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。">
+                            </div>
+                            <div class="txtbox">
+                                <label for="InputTextarea">内容</label>
+                                <textarea class="form-control" name="content" id="InputTextarea" placeholder="内容を入力して下さい。"></textarea>
+                            </div>
+                            <div class="confirm text-center">
+                                <input type="submit" value="確認" class="btn btn-success">
+                            </div>
                         </div>
                     </form>
                 </div>
