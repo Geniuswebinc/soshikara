@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>お問い合わせフォーム | そして空になった</title>
+    <title> | そして空になった</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.0">
@@ -26,76 +26,73 @@
 <body >
     <header>
         <div class="row">
-            <img src="./../assets/img/logo.png" width="250">
+            <img src="./../assets/images/logo.png" width="250" style="padding-left: 10px;">
         </div>
 
     </header>
 
         <section class="container">
-            <div class="row otoiawse text-center">
-                <div class="col-xs-12 text-center"><a class="btn btn-success" href="">お問い合わせはこちら</a></div>
+            <div class="box">
+                <div class="login">
+                    <h3>お問い合わせ</h3>
+
+                    <form>
+                        <div class="form-group">
+                            <label for="InputName">お名前</label>
+                            <input type="user_name" class="form-control" id="InputName" placeholder="名前を入力して下さい。">
+                        </div>
+                        <div class="form-group">
+                            <label for="InputEmail">メールアドレス</label>
+                            <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。">
+                        </div>
+                        <div class="from-group">
+                            <label for="InputTextarea">内容</label>
+                            <textarea class="form-control" name="content" id="InputTextarea" placeholder="内容を入力して下さい。"></textarea>
+                        </div>
+                        <div class="confirm text-center">
+                            <input type="submit" value="確認" class="btn btn-success">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="container">
+            <div class="row toroku-link text-center">
+                <a href="">会員登録はこちら（無料）</a>
             </div>
 
-                <div class="row login-container">
-                    <div class="box login">
-                        <div class="login">
-                            <h3>お問い合わせ</h3>
-
-                            <form>
-                                <div class="form-group">
-                                    <label for="InputName">お名前</label>
-                                    <input type="user_name" class="form-control" id="InputName" placeholder="名前を入力して下さい。">
-                                </div>
-                                <div class="form-group">
-                                    <label for="InputEmail">メールアドレス</label>
-                                    <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。">
-                                </div>
-                                <div class="from-group">
-                                    <label for="InputTextarea">内容</label>
-                                    <textarea class="form-control" name="content" id="InputTextarea"></textarea>
-                                </div>
-                                <div class="text-center">
-                                    <input type="submit" value="確認" class="btn btn-success">
-                                </div>
-                            </form>
+            <div class="this-box-all">
+                <div class="row ttl">
+                    <h4>このサイトについて</h4>
+                </div>
+                <div class="row this-contents">
+                    <div class="col-xs-4 this-content">
+                        <div class="this-content-txt this-box">
+                            <p>冷蔵庫の中を管理できるよ！</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 this-content">
+                        <div class="this-content-txt this-box">
+                            <p>栄養バランスを管理できるよ！</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 this-content">
+                        <div class="this-content-txt this-box">
+                            <p>レシピ検索できるよ！</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="row text-center toroku-link">
-                    <a href="">会員登録はこちら（無料）</a>
-                </div>
-
-                <div class="this-box-all">
-                    <div class="row ttl">
-                        <h4>このサイトについて</h4>
-                    </div>
-                    <div class="row this-contents">
-                        <div class="col-xs-4 this-content">
-                            <div class="this-content-txt this-box">
-                                <p>冷蔵庫の中を管理できるよ！</p>
-                            </div>
-                        </div>
-                        <div class="col-xs-4 this-content">
-                            <div class="this-content-txt this-box">
-                                <p>栄養バランスを管理できるよ！</p>
-                            </div>
-                        </div>
-                        <div class="col-xs-4 this-content">
-                            <div class="this-content-txt this-box">
-                                <p>レシピ検索できるよ！</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+            </div>
 
         </section>
 
 
-    <footer class="text-center">
-        <p>©︎Pistachio, Inc.</p>
-    </footer>
+        <footer class="text-center bg_orange">
+            <p>©️Pistachio, Inc.</p>
+        </footer>
 
 
     <!-- Latest compiled and minified JavaScript -->
