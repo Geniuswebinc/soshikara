@@ -1,3 +1,23 @@
+<?php
+    require_once dirname(__FILE__) .'./../data/require.php';
+
+
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $content = $_POST['content'];
+
+    // データベース接続のクラス
+    $conn = new DbConn();
+
+    $sql  = 'INSERT INTO ';
+    $sql .= '    contacts (contacts_name, contacts_mail, content)';
+    $sql .= '  VALUES ( ';
+    $sql .= '   "'.$name.'", "'.$email.'", "'.$content.'" ';
+    $sql .= '  )';
+    $conn->execute($sql);
+    // var_dump($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
