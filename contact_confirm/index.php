@@ -1,3 +1,9 @@
+<?php
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $content = $_POST['content'];
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -38,7 +44,7 @@
                     <div class="login">
                         <h3>お問い合わせ内容の確認</h3>
 
-                        <form action="thanks.php" method="post">
+                        <form action="./../contact_thanks/index.php" method="post">
                             <div class="form-group">
                                 <div class="txtbox">
                                     <label class="control-label">お名前</label>
