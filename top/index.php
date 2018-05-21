@@ -1,3 +1,22 @@
+<?php
+require_once dirname(__FILE__) .'./../data/require.php';
+
+$login_mail=$_GET['login_mail'];
+$login_pass=$_GET['login_pass'];
+
+$conn = new DbConn();
+
+if($login_mail){
+$sql  = ' SELECT * FROM informations';
+ $sql .= '   WHERE informations_mail="'.$login_mail.'"';
+}
+
+$informations = $conn->fetch($sql);
+
+var_dump($informations);
+var_dump($sql);
+?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -32,7 +51,9 @@
             </div>
             <div class="col-xs-6 top-login text-right">
                 <a href="">お問い合わせはこちら</a>
-                <p class="msg">ログイン中 ピスタチオさん</p>
+                <p class="msg">ログイン中 <?php foreach($informations as $val){
+                    echo $val[informations_name];
+                } ?>さん</p>
                 <form name="Logout" method="post" action="/cgi-bin/Logout.cgi">
                     <input type="submit" value="Logout" class="btn btn-success btn-sm">
                 </form>
