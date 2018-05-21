@@ -1,3 +1,23 @@
+<?php
+    require_once dirname(__FILE__) .'./../data/require.php';
+
+    $login_mail=$_GET['login_mail'];
+    $login_pass=$_GET['login_pass'];
+
+    $conn = new DbConn();
+
+    if($login_mail){
+    $sql  = ' SELECT * FROM informations';
+    $sql .= '   WHERE informations_mail="'.$login_mail.'"';
+}
+
+    $informations = $conn->fetch($sql);
+
+    var_dump($informations);
+    var_dump($sql);
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -41,21 +61,29 @@
             <div class="box login">
                 <div class="login">
                     <h3>ログイン</h3>
-                    <div class="form-group">
-                        <label for="InputEmail">メールアドレス</label>
-                        <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。">
-                    </div>
-                    <div class="form-group">
-                        <label for="InputPassword">パスワード</label>
-                        <input type="password" class="form-control" id="InputPassword" placeholder="パスワードを入力して下さい。">
-                    </div>
-                    <div class="text-center"><input type="submit" value="ログイン" class="btn btn-success"></div>
+                    <form method="get" action="<?php foreach($informations as $val){
+                        if($val[password]==$login_pass){
+                            echo './../top/index.php';
+                        }
+                    } ?>">
+                        <div class="form-group">
+                            <label for="InputEmail">メールアドレス</label>
+                            <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。" name="login_mail">
+                        </div>
+                        <div class="form-group">
+                            <label for="InputPassword">パスワード</label>
+                            <input type="password" class="form-control" id="InputPassword" placeholder="パスワードを入力して下さい。" name="login_pass">
+                        </div>
+                        <div class="text-center"><input type="submit" value="ログイン" class="btn btn-success"></div>
+
+
+                    </form>
                 </div>
             </div>
         </div>
 
         <div class="row text-center toroku-link">
-            <a href="">会員登録はこちら（無料）</a>
+            <a href="./../regsration.php">会員登録はこちら（無料）</a>
         </div>
 
         <div class="this-box-all">
@@ -79,7 +107,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
     </section>
