@@ -43,18 +43,18 @@
                             <div class="form-group">
                                 <div class="txtbox">
                                     <label for="InputName">お名前</label>
-                                    <input type="user_name" name="name" class="form-control" id="InputName" placeholder="名前を入力して下さい。">
+                                    <input type="user_name" name="name" class="form-control" id="InputName" placeholder="名前を入力して下さい。" required>
                                 </div>
                                 <div class="txtbox">
                                     <label for="InputEmail">メールアドレス</label>
-                                    <input type="email" name="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。">
+                                    <input type="email" name="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。" required>
                                 </div>
                                 <div class="txtbox">
                                     <label for="InputTextarea">内容</label>
-                                    <textarea class="form-control" name="content" id="InputTextarea" placeholder="内容を入力して下さい。"></textarea>
+                                    <textarea class="form-control" name="content" id="InputTextarea" placeholder="内容を入力して下さい。" required></textarea>
                                 </div>
                                 <div class="confirm text-center">
-                                    <input type="submit" value="確認" class="btn btn-success">
+                                    <input type="submit" value="確認" class="btn btn-success" required>
                                 </div>
                             </div>
                         </form>
