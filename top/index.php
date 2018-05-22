@@ -1,22 +1,36 @@
 <?php
-require_once dirname(__FILE__) .'./../data/require.php';
+    require_once dirname(__FILE__) .'./../data/require.php';
 
-$login_mail=$_GET['login_mail'];
-$login_pass=$_GET['login_pass'];
+    $login_mail=$_GET['login_mail'];
+    $login_pass=$_GET['login_pass'];
 
-$conn = new DbConn();
+    $search_recipe=$_GET['search_recipe'];
 
-if($login_mail){
-$sql  = ' SELECT * FROM informations';
- $sql .= '   WHERE informations_mail="'.$login_mail.'"';
-}
+    $conn = new DbConn();
 
-$informations = $conn->fetch($sql);
+    $sql  = 'SELECT * FROM consumed';
+    $sql .= '   INNER JOIN pantrys';
+    $sql .= '   ON consumed.pantrys_id=pantrys.id';
+    $sql .= '   INNER JOIN foods';
+    $sql .= '   ON pantrys.foods_id=foods.id';
+    $sql .= '   INNER JOIN informations';
+    $sql .= '   ON pantrys.informations_id=informations.id';
+    $sql .= '   WHERE state=1';
+    $sql .= '   ORDER BY created_at desc;';
 
-var_dump($informations);
-var_dump($sql);
+
+
+    if($login_mail){
+        $sql  = ' SELECT * FROM informations';
+        $sql .= '   WHERE infsormations_mail="'.$login_mail.'"';
+    }
+
+    $informations = $conn->fetch($sql);
+
+    var_dump($informations);
+    var_dump($sql);
+
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -51,12 +65,18 @@ var_dump($sql);
             </div>
             <div class="col-xs-6 top-login text-right">
                 <a href="">お問い合わせはこちら</a>
-                <p class="msg">ログイン中 <?php foreach($informations as $val){
-                    echo $val[informations_name];
-                } ?>さん</p>
-                <form name="Logout" method="post" action="/cgi-bin/Logout.cgi">
-                    <input type="submit" value="Logout" class="btn btn-success btn-sm">
-                </form>
+
+                <?php foreach($informations as $val){
+                    if($login_mail){?>
+                        <p class="msg">ログイン中 <?php echo $val[informations_name];?>さん</p>
+                        <form name="Logout" method="post" action="/cgi-bin/Logout.cgi">
+                            <input type="submit" value="Logout" class="btn btn-success btn-sm">
+                        </form>
+                    <?php }else{?>
+                        <a href="./../registration/index.php">会員登録</a><br>
+                        <a class="btn btn-success btn-sm" href="./../login/index.php">Login</a>
+                    <?php }
+                } ?>
             </div>
         </div>
 
@@ -79,10 +99,12 @@ var_dump($sql);
                         <h2 class="col-xs-6">パントリー検索</h2>
                         <div class="col-xs-6 text-right btnstyl"><a class="btn btn-success btn-sm btnhalf" href="#登録ページ">一覧へ</a></div>
                     </div>
-                    <form class="form-inline">
+                    <form class="form-inline" method=get action="">
                         <div class="row seach-form">
-                            <input type="search" name="" class="col-xs-6 form-control input-sm" required>
-                            <div class="col-xs-6 text-right btnstyl"><input type="submit" value="検索" class="btn btn-success btn-sm btnhalf"></div>
+                            <input type="search"  name="foods_name" class="col-xs-6 form-control input-sm" required>
+                            <div class="col-xs-6 text-right btnstyl">
+                                <button type="submit" class="btn btn-success btn-sm btnhalf">検索</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -92,12 +114,15 @@ var_dump($sql);
                 <div class="seach-container box">
                     <div class="row seach-container-top">
                         <h2 class="col-xs-6">レシピ検索</h2>
-                        <div class="col-xs-6 text-right btnstyl"><a class="btn btn-success btn-sm btnhalf" href="#登録ページ">一覧へ</a></div>
+                        <div class="col-xs-6 text-right btnstyl"><a class="btn btn-success btn-sm btnhalf" href="https://www.bob-an.com/recipes/search/SF.search_type:1/">一覧へ</a></div>
                     </div>
-                    <form class="form-inline">
+                    <form class="form-inline" method="get" id="searchBox">
                         <div class="row seach-form">
-                            <input type="search" name="" class="col-xs-6 form-control input-sm" required>
-                            <div class="col-xs-6 text-right btnstyl"><input type="submit" value="検索" class="btn btn-success btn-sm btnhalf"></div>
+                            <input type="search" name="search_recipe" class="col-xs-6 form-control input-sm" id="searchRecipe" required>
+                            <div class="col-xs-6 text-right btnstyl">
+                                <button type="submit" class="btn btn-success btn-sm btnhalf"
+                                onclick="$('#searchBox').attr('action', 'https://www.bob-an.com/recipes/search/SF.search_type:1/SF.query:'+ $('#searchRecipe').val() ); $('#searchBox').submit();">検索</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -165,6 +190,7 @@ var_dump($sql);
 
 
     <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>
