@@ -1,0 +1,27 @@
+.pantory form {
+    margin: 0;
+}
+
+.pantory .b1_gray {
+    border: 1px solid #989898;
+}
+
+.pantory .p_20_10 {
+    padding: 20px 10px;
+}
+
+.pantory .br_5 {
+    border-radius: 5px;
+}
+
+.pantory .mb_30 {
+    margin-bottom: 30px;
+}
+
+.pantory .mt_25 {
+    margin-top: 25px;
+}
+
+.pantory .right {
+    text-align: right;
+}
