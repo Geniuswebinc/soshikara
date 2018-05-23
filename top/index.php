@@ -61,12 +61,12 @@
             <div class="col-xs-6 top-login text-right">
                 <a href="">お問い合わせはこちら</a>
 
-                <?php foreach($informations as $val){?>
+
                     <p class="msg">ログイン中 <?php echo $val[informations_name];?>さん</p>
                     <form name="Logout" method="post" action="/cgi-bin/Logout.cgi">
                         <input type="submit" value="Logout" class="btn btn-success btn-sm">
                     </form>
-                <?php }?>
+
             </div>
         </div>
 
@@ -87,11 +87,11 @@
                 <div class="seach-container box">
                     <div class="row seach-container-top">
                         <h2 class="col-xs-6">パントリー検索</h2>
-                        <div class="col-xs-6 text-right btnstyl"><a class="btn btn-success btn-sm btnhalf" href="#登録ページ">一覧へ</a></div>
+                        <div class="col-xs-6 text-right btnstyl"><a class="btn btn-success btn-sm btnhalf" href="./../../pantry/index.php">一覧へ</a></div>
                     </div>
-                    <form class="form-inline" method=get action="">
+                    <form class="form-inline" method=post action="./../../pantry/index.php">
                         <div class="row seach-form">
-                            <input type="search"  name="foods_name" class="col-xs-6 form-control input-sm" required>
+                            <input type="search"  name="search_food" class="col-xs-6 form-control input-sm" required>
                             <div class="col-xs-6 text-right btnstyl">
                                 <button type="submit" class="btn btn-success btn-sm btnhalf">検索</button>
                             </div>
@@ -126,6 +126,9 @@
                 <div class="col-xs-4 limit">
                     <h6>今日</h6>
                     <div class="limit-food">
+                        <?php foreach($pantrys as $val){
+                            echo $val[foods_name];
+                        }?>
                         <li><a href="#">おこめ</a></li>
                         <li><a href="#">おにぎり</a></li>
                         <li><a href="#">おむずび</a></li>
