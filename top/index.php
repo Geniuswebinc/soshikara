@@ -14,16 +14,15 @@
     $sql .= '   LEFT OUTER JOIN informations';
     $sql .= '   ON pantrys.informations_id=informations.id';
 
-    $conn->fetch($sql);
-
     if($login_mail){
         $sql  = ' SELECT * FROM informations';
         $sql .= '   WHERE infsormations_mail="'.$login_mail.'"';
     }
 
-    $informations = $conn->fetch($sql);
+    $conn->fetch($sql);
 
     var_dump($informations);
+    var_dump($pantrys);
     var_dump($sql);
 
 ?>
@@ -41,8 +40,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link href="./../../assets/css/common.css" rel="stylesheet" media="all">
-    <link href="./../../assets/css/top.css" rel="stylesheet" media="all">
+    <link href="./../assets/css/common.css" rel="stylesheet" media="all">
+    <link href="./../assets/css/top.css" rel="stylesheet" media="all">
     <!--[if IE 9]>
     <script src="/js/html5shiv.js"></script>
     <script src="/js/css3-mediaqueries.js"></script>
@@ -62,17 +61,12 @@
             <div class="col-xs-6 top-login text-right">
                 <a href="">お問い合わせはこちら</a>
 
-                <?php foreach($informations as $val){
-                    if($login_mail){?>
-                        <p class="msg">ログイン中 <?php echo $val[informations_name];?>さん</p>
-                        <form name="Logout" method="post" action="/cgi-bin/Logout.cgi">
-                            <input type="submit" value="Logout" class="btn btn-success btn-sm">
-                        </form>
-                    <?php }else{?>
-                        <a href="./../registration/index.php">会員登録</a><br>
-                        <a class="btn btn-success btn-sm" href="./../login/index.php">Login</a>
-                    <?php }
-                } ?>
+                <?php foreach($informations as $val){?>
+                    <p class="msg">ログイン中 <?php echo $val[informations_name];?>さん</p>
+                    <form name="Logout" method="post" action="/cgi-bin/Logout.cgi">
+                        <input type="submit" value="Logout" class="btn btn-success btn-sm">
+                    </form>
+                <?php }?>
             </div>
         </div>
 
