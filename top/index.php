@@ -8,17 +8,13 @@
 
     $conn = new DbConn();
 
-    $sql  = 'SELECT * FROM consumed';
-    $sql .= '   INNER JOIN pantrys';
-    $sql .= '   ON consumed.pantrys_id=pantrys.id';
-    $sql .= '   INNER JOIN foods';
-    $sql .= '   ON pantrys.foods_id=foods.id';
-    $sql .= '   INNER JOIN informations';
+    $sql  = 'SELECT * FROM pantrys';
+    $sql .= '   LEFT OUTER JOIN foods';
+    $sql .= '   ON pantrys.foods_number=foods.id';
+    $sql .= '   LEFT OUTER JOIN informations';
     $sql .= '   ON pantrys.informations_id=informations.id';
-    $sql .= '   WHERE state=1';
-    $sql .= '   ORDER BY created_at desc;';
 
-
+    $conn->fetch($sql);
 
     if($login_mail){
         $sql  = ' SELECT * FROM informations';
