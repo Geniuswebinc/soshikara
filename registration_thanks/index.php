@@ -1,3 +1,20 @@
+<?php
+    require_once dirname(__FILE__) .'./../data/require.php';
+
+    $informations_mail=$_POST['informations_mail'];
+    $password=$_POST['password'];
+    $informations_name=$_POST['informations_name'];
+
+    $conn = new DbConn();
+
+    if($informations_mail){
+    $sql  = 'INSERT INTO informations(informations_mail,password,informations_name)';
+    $sql .= '   VALUES("'.$informations_mail.'","'.$password.'","'.$informations_name.'")';
+    }
+
+    $conn->execute($sql);
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -34,14 +51,14 @@
 
     <section class="container">
         <div class="row otoiawse text-center">
-            <div class="col-xs-12 text-center"><a class="btn btn-success" href="">お問い合わせはこちら</a></div>
+            <div class="col-xs-12 text-center"><a class="btn btn-success" href="./../../contact_form/index.php">お問い合わせはこちら</a></div>
         </div>
 
         <div class="row thanx-msg box text-center">
             <div class="thanx-txt">
                 <h3>会員登録いただきありがとうございました。<br>以下のリンクよりサービスをご利用ください。</h3>
             </div>
-            <a href="">そして空になった TOPページ</a>
+            <a href="./../../top/index.php">そして空になった TOPページ</a>
         </div>
     </section>
 
