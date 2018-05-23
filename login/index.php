@@ -1,8 +1,8 @@
 <?php
     require_once dirname(__FILE__) .'./../data/require.php';
 
-    $login_mail=$_GET['login_mail'];
-    $login_pass=$_GET['login_pass'];
+    $login_mail=$_POST['login_mail'];
+    $login_pass=$_POST['login_pass'];
 
     $conn = new DbConn();
 
@@ -61,7 +61,7 @@
             <div class="box login">
                 <div class="login">
                     <h3>ログイン</h3>
-                    <form method="get" action="<?php foreach($informations as $val){
+                    <form method="post" action="<?php foreach($informations as $val){
                         if($val[password]==$login_pass){
                             echo './../top/index.php';
                         }
