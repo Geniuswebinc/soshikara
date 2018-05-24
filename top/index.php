@@ -1,3 +1,31 @@
+<?php
+    require_once dirname(__FILE__) .'./../data/require.php';
+
+    $login_mail=$_GET['login_mail'];
+    $login_pass=$_GET['login_pass'];
+
+    $search_recipe=$_GET['search_recipe'];
+
+    $conn = new DbConn();
+
+    $sql  = 'SELECT * FROM pantrys';
+    $sql .= '   LEFT OUTER JOIN foods';
+    $sql .= '   ON pantrys.foods_number=foods.id';
+    $sql .= '   LEFT OUTER JOIN informations';
+    $sql .= '   ON pantrys.informations_id=informations.id';
+
+    if($login_mail){
+        $sql  = ' SELECT * FROM informations';
+        $sql .= '   WHERE infsormations_mail="'.$login_mail.'"';
+    }
+
+    $conn->fetch($sql);
+
+    var_dump($informations);
+    var_dump($pantrys);
+    var_dump($sql);
+
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -12,8 +40,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link href="./../../assets/css/common.css" rel="stylesheet" media="all">
-    <link href="./../../assets/css/top.css" rel="stylesheet" media="all">
+    <link href="./../assets/css/common.css" rel="stylesheet" media="all">
+    <link href="./../assets/css/top.css" rel="stylesheet" media="all">
     <!--[if IE 9]>
     <script src="/js/html5shiv.js"></script>
     <script src="/js/css3-mediaqueries.js"></script>
@@ -32,10 +60,13 @@
             </div>
             <div class="col-xs-6 top-login text-right">
                 <a href="">お問い合わせはこちら</a>
-                <p class="msg">ログイン中 ピスタチオさん</p>
-                <form name="Logout" method="post" action="/cgi-bin/Logout.cgi">
-                    <input type="submit" value="Logout" class="btn btn-success btn-sm">
-                </form>
+
+
+                    <p class="msg">ログイン中 <?php echo $val[informations_name];?>さん</p>
+                    <form name="Logout" method="post" action="/cgi-bin/Logout.cgi">
+                        <input type="submit" value="Logout" class="btn btn-success btn-sm">
+                    </form>
+
             </div>
         </div>
 
@@ -56,12 +87,14 @@
                 <div class="seach-container box">
                     <div class="row seach-container-top">
                         <h2 class="col-xs-6">パントリー検索</h2>
-                        <div class="col-xs-6 text-right btnstyl"><a class="btn btn-success btn-sm btnhalf" href="#登録ページ">一覧へ</a></div>
+                        <div class="col-xs-6 text-right btnstyl"><a class="btn btn-success btn-sm btnhalf" href="./../../pantry/index.php">一覧へ</a></div>
                     </div>
-                    <form class="form-inline">
+                    <form class="form-inline" method=post action="./../../pantry/index.php">
                         <div class="row seach-form">
-                            <input type="search" name="" class="col-xs-6 form-control input-sm" required>
-                            <div class="col-xs-6 text-right btnstyl"><input type="submit" value="検索" class="btn btn-success btn-sm btnhalf"></div>
+                            <input type="search"  name="search_food" class="col-xs-6 form-control input-sm" required>
+                            <div class="col-xs-6 text-right btnstyl">
+                                <button type="submit" class="btn btn-success btn-sm btnhalf">検索</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -71,12 +104,15 @@
                 <div class="seach-container box">
                     <div class="row seach-container-top">
                         <h2 class="col-xs-6">レシピ検索</h2>
-                        <div class="col-xs-6 text-right btnstyl"><a class="btn btn-success btn-sm btnhalf" href="#登録ページ">一覧へ</a></div>
+                        <div class="col-xs-6 text-right btnstyl"><a class="btn btn-success btn-sm btnhalf" href="https://www.bob-an.com/recipes/search/SF.search_type:1/">一覧へ</a></div>
                     </div>
-                    <form class="form-inline">
+                    <form class="form-inline" method="get" id="searchBox">
                         <div class="row seach-form">
-                            <input type="search" name="" class="col-xs-6 form-control input-sm" required>
-                            <div class="col-xs-6 text-right btnstyl"><input type="submit" value="検索" class="btn btn-success btn-sm btnhalf"></div>
+                            <input type="search" name="search_recipe" class="col-xs-6 form-control input-sm" id="searchRecipe" required>
+                            <div class="col-xs-6 text-right btnstyl">
+                                <button type="submit" class="btn btn-success btn-sm btnhalf"
+                                onclick="$('#searchBox').attr('action', 'https://www.bob-an.com/recipes/search/SF.search_type:1/SF.query:'+ $('#searchRecipe').val() ); $('#searchBox').submit();">検索</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -90,6 +126,9 @@
                 <div class="col-xs-4 limit">
                     <h6>今日</h6>
                     <div class="limit-food">
+                        <?php foreach($pantrys as $val){
+                            echo $val[foods_name];
+                        }?>
                         <li><a href="#">おこめ</a></li>
                         <li><a href="#">おにぎり</a></li>
                         <li><a href="#">おむずび</a></li>
@@ -144,6 +183,7 @@
 
 
     <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>
