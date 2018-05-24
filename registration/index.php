@@ -1,20 +1,4 @@
-<?php
-    require_once dirname(__FILE__) .'./../data/require.php';
 
-    $informations_mail=$_GET['informations_mail'];
-    $password=$_GET['password'];
-    $informations_name=$_GET['informations_name'];
-
-    $conn = new DbConn();
-
-    if($informations_mail){
-    $sql  = 'INSERT INTO informations(informations_mail,password,informations_name)';
-    $sql .= '   VALUES("'.$informations_mail.'","'.$password.'","'.$informations_name.'")';
-    }
-
-    $conn->execute($sql);
-
-?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -51,14 +35,14 @@
 
     <section class="container">
         <div class="row otoiawse text-center">
-            <div class="col-xs-12 text-center"><a class="btn btn-success" href="">お問い合わせはこちら</a></div>
+            <div class="col-xs-12 text-center"><a class="btn btn-success" href="./../../contact_form/index.php">お問い合わせはこちら</a></div>
         </div>
 
         <div class="row login-container">
             <div class="box login">
                 <div class="login">
                     <h3>会員登録</h3>
-                    <form method="get">
+                    <form method="post" action="./../../registration_thanks/index.php">
                         <div class="form-group">
                             <label for="InputEmail">メールアドレス</label>
                             <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。" name="informations_mail">
