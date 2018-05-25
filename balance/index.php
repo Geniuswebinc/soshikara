@@ -1,8 +1,10 @@
 <?php
-    session_start();
+    require_once dirname(__FILE__) .'./../login/login.php';
+
     $informations_id = $_SESSION['id'];
 
     require_once dirname(__FILE__) .'./../data/require.php';
+
 
     // データベース接続のクラス
     $conn = new DbConn();
@@ -176,21 +178,9 @@
 </head>
 <body onload="displayPieChart();">
     <div id="wrapper">
-        <header>
-            <div class="row">
-                <img src="./../assets/images/logo.png" width="250" style="padding-left: 10px;">
-            </div>
-            <div class="row mt_10">
-                <ul class="nav nav-justified bg_orange">
-                    <li role="presentation" class="active"><a href="#">HOME</a></li>
-                    <li role="presentation"><a href="#">登録・一覧</a></li>
-                    <li role="presentation"><a href="#">栄養バランス</a></li>
-                    <li role="presentation"><a href="#">旬の食材</a></li>
-                    <li role="presentation"><a href="#">キャラクター</a></li>
-                </ul>
-            </div>
-
-        </header>
+        <?php
+        require_once dirname(__FILE__) .'./../include/header.php';
+        ?>
 
         <main>
             <section class="blance">
@@ -491,9 +481,10 @@
             </section>
         </main>
 
-        <footer class="text-center bg_orange">
-            <p>©️Pistachio, Inc.</p>
-        </footer>
+        <?php
+            require_once dirname(__FILE__) .'./../include/footer.php';
+        ?>
+
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
