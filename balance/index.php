@@ -179,7 +179,7 @@
 <body onload="displayPieChart();">
     <div id="wrapper">
         <?php
-        require_once dirname(__FILE__) .'./../include/header.php';
+            require_once dirname(__FILE__) .'./../include/header.php';
         ?>
 
         <main>
