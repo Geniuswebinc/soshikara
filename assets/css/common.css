@@ -1,0 +1,30 @@
+body {
+    background-color: #F6F5F0;
+    font-size: 16px;
+    color: #000;
+}
+
+.b1 {
+    border: 1px solid red;
+}
+
+.bg_orange {
+    background-color: #FFC300;
+}
+
+.bg_white {
+    background-color: #fff;
+}
+.nav li a{
+    color: #000;
+}
+
+.nav li a:hover,
+.nav li a:active {
+    background-color: #FFE300;
+}
+
+footer p{
+    margin: 0;
+    padding: 10px;
+}
