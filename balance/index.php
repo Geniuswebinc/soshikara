@@ -1,4 +1,7 @@
 <?php
+    session_start();
+    $informations_id = $_SESSION['id'];
+
     require_once dirname(__FILE__) .'./../data/require.php';
 
     // データベース接続のクラス
@@ -22,7 +25,7 @@
     $sql .= ' FROM foods ';
     $sql .= ' INNER JOIN pantrys ON foods.id = pantrys.foods_id ';
     $sql .= ' INNER JOIN consumed ON pantrys.id = consumed.pantrys_id ';
-    $sql .= ' WHERE DATE(eat_at)  = DATE(now()) ';
+    $sql .= ' WHERE DATE(eat_at)  = DATE(now()) && informations_id = '.'"'.$informations_id.'"';
     $sql .= ' GROUP BY foods.number ';
     $sql .= ' ) AS T1';
 
@@ -41,6 +44,8 @@
 
 
 
+
+
     $sql  = 'SELECT ';
     $sql .= ' COUNT(CASE WHEN T2.nutrients=1 THEN 1  END) as ycnt1,';
     $sql .= ' COUNT(CASE WHEN T2.nutrients=2 THEN 1  END) as ycnt2,';
@@ -52,15 +57,17 @@
     $sql .= ' SELECT foods_name,nutrients,eat_at,informations_id  ';
     $sql .= ' FROM foods ';
     $sql .= ' INNER JOIN pantrys ON foods.id = pantrys.foods_id ';
-    $sql .= ' INNER JOIN consumed ON pantrys.id = consumed.pantrys_id ';
-    $sql .= ' WHERE DATE(eat_at)  = DATE(now()) - 1';
+    $sql .= ' INNER JOIN consumed ON pantrys.id = consumed.pantrys_id ' ;
+    $sql .= ' WHERE DATE(eat_at)  = DATE(now()) - 1 && informations_id = '.'"'.$informations_id.'"';
     $sql .= ' GROUP BY foods.number ';
     $sql .= ' ) AS T2';
 
     $foods = $conn->fetch($sql);
     $consumed = $conn->fetch($sql);
     $pantrys = $conn->fetch($sql);
+    $informations = $conn->fetch($sql);
 
+// var_dump($sql);
 
 
     foreach ($foods as $val) {
@@ -84,13 +91,13 @@
     $sql .= ' FROM foods ';
     $sql .= ' INNER JOIN pantrys ON foods.id = pantrys.foods_id ';
     $sql .= ' INNER JOIN consumed ON pantrys.id = consumed.pantrys_id ';
-    $sql .= ' WHERE DATE(eat_at)  BETWEEN (DATE(now()) - INTERVAL 6 DAY) AND DATE(now()) ';
+    $sql .= ' WHERE DATE(eat_at)  BETWEEN (DATE(now()) - INTERVAL 6 DAY) AND DATE(now()) && informations_id = '.'"'.$informations_id.'"';
     $sql .= ' ) AS T3';
 
     $foods = $conn->fetch($sql);
     $consumed = $conn->fetch($sql);
     $pantrys = $conn->fetch($sql);
-
+    $informations = $conn->fetch($sql);
 
 
     foreach ($foods as $val) {
@@ -102,7 +109,7 @@
         $week06 = ($val['wcnt6'] / 7) / 3 * 100;
     };
 
-    var_dump($foods);
+
 
 
 
@@ -119,26 +126,27 @@
     $sql .= ' FROM foods ';
     $sql .= ' INNER JOIN pantrys ON foods.id = pantrys.foods_id ';
     $sql .= ' INNER JOIN consumed ON pantrys.id = consumed.pantrys_id ';
-    $sql .= ' WHERE DATE(eat_at)  BETWEEN (DATE(now()) - INTERVAL 29 DAY) AND DATE(now()) ';
+    $sql .= ' WHERE DATE(eat_at)  BETWEEN (DATE(now()) - INTERVAL 29 DAY) AND DATE(now()) && informations_id = '.'"'.$informations_id.'"';
     $sql .= ' ) AS T4';
 
     $foods = $conn->fetch($sql);
     $consumed = $conn->fetch($sql);
     $pantrys = $conn->fetch($sql);
+    $informations = $conn->fetch($sql);
 
     // var_dump($sql);
 
     foreach ($foods as $val) {
-        $month01 = ($val['mcnt1'] / 7) / 5 * 100;
-        $month02 = ($val['mcnt2'] / 7) / 3 * 100;
-        $month03 = ($val['mcnt3'] / 7) / 5 * 100;
-        $month04 = ($val['mcnt4'] / 7) / 7 * 100;
-        $month05 = ($val['mcnt5'] / 7) / 4 * 100;
-        $month06 = ($val['mcnt6'] / 7) / 3 * 100;
+        $month01 = ($val['mcnt1'] / 30) / 5 * 100;
+        $month02 = ($val['mcnt2'] / 30) / 3 * 100;
+        $month03 = ($val['mcnt3'] / 30) / 5 * 100;
+        $month04 = ($val['mcnt4'] / 30) / 7 * 100;
+        $month05 = ($val['mcnt5'] / 30) / 4 * 100;
+        $month06 = ($val['mcnt6'] / 30) / 3 * 100;
     };
 
-
-
+// var_dump($sql);
+    // var_dump($informations_id);
 ?>
 
 <!DOCTYPE html>
