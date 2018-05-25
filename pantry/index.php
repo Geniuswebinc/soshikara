@@ -1,5 +1,8 @@
 <?php
 require_once dirname(__FILE__) .'./../data/require.php';
+require_once dirname(__FILE__) .'./../login/login.php';
+
+
 
 // データベース接続のクラス
 $conn = new DbConn();
@@ -121,21 +124,9 @@ $consumeds = $conn->fetch($sql);
     <![endif]-->
 </head>
 <body>
-    <header>
-        <div class="row">
-            <img src="./../assets/images/logo.png" width="250" style="padding-left: 10px;">
-        </div>
-        <div class="row mt_10">
-            <ul class="nav nav-justified bg_orange">
-                <li role="presentation" class="active"><a href="#">HOME</a></li>
-                <li role="presentation"><a href="#">登録・一覧</a></li>
-                <li role="presentation"><a href="#">栄養バランス</a></li>
-                <li role="presentation"><a href="#">旬の食材</a></li>
-                <li role="presentation"><a href="#">キャラクター</a></li>
-            </ul>
-        </div>
-
-    </header>
+    <?php
+        require_once dirname(__FILE__) .'./../include/header.php';
+    ?>
 
     <section class="pantry">
         <h1 class="pl_10">登録・一覧</h1>
@@ -303,13 +294,10 @@ $consumeds = $conn->fetch($sql);
         </div>
     </section>
 
-    <footer class="text-center bg_orange">
-        <p>©️Pistachio, Inc.</p>
-    </footer>
+    <?php
+        require_once dirname(__FILE__) .'./../include/footer.php';
+    ?>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
     <script type="text/javascript">
         $('select').select2();
