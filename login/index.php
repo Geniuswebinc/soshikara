@@ -1,20 +1,30 @@
 <?php
-    require_once dirname(__FILE__) .'./../data/require.php';
+session_start();
+require_once dirname(__FILE__) .'./../data/require.php';
 
+$conn = new DbConn();
+
+$informations = array();
+if($_POST){
     $login_mail=$_POST['login_mail'];
     $login_pass=$_POST['login_pass'];
 
-    $conn = new DbConn();
-
-    if($login_mail){
-    $sql  = ' SELECT * FROM informations';
-    $sql .= '   WHERE informations_mail="'.$login_mail.'"';
-}
+    $sql  = ' SELECT informations_name, id FROM informations';
+    $sql .= '   WHERE informations_mail="'.$login_mail.'" AND password = "'.$login_pass .'"';
 
     $informations = $conn->fetch($sql);
 
-    var_dump($informations);
-    var_dump($sql);
+    if(count($informations) > 0){
+        $_SESSION['name'] = $informations[0]['informations_name'];
+        $_SESSION['id']=$informations[0]['id'];
+    }
+}
+
+if($_SESSION['id'] > 0) {
+    header('Location: ../top/');
+}
+
+//var_dump($_SESSION);
 
 
 ?>
@@ -61,11 +71,7 @@
             <div class="box login">
                 <div class="login">
                     <h3>ログイン</h3>
-                    <form method="post" action="<?php foreach($informations as $val){
-                        if($val[password]==$login_pass){
-                            echo './../top/index.php';
-                        }
-                    } ?>">
+                    <form method="post" id="logingo" action="#">
                         <div class="form-group">
                             <label for="InputEmail">メールアドレス</label>
                             <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。" name="login_mail">
@@ -74,7 +80,9 @@
                             <label for="InputPassword">パスワード</label>
                             <input type="password" class="form-control" id="InputPassword" placeholder="パスワードを入力して下さい。" name="login_pass">
                         </div>
-                        <div class="text-center"><input type="submit" value="ログイン" class="btn btn-success"></div>
+                        <div class="text-center">
+                            <input type="submit" value="ログイン" class="btn btn-success btn-sm btnhalf">
+                        </div>
 
 
                     </form>
