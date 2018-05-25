@@ -1,4 +1,7 @@
 <?php
+    session_start();
+    $id=$_SESSION['id'];
+    require_once dirname(__FILE__) .'./../login/login.php';
     require_once dirname(__FILE__) .'./../data/require.php';
 
 
@@ -16,6 +19,12 @@
     $sql .= '  )';
     $conn->execute($sql);
     // var_dump($sql);
+
+    if(!$_SESSION['id'] > 0) {
+        header('Location: ./../top/index.php');
+    }elseif(!$_SESSION['id'] < 0) {
+        header('Location: ./../login/index.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +70,10 @@
                 </div>
 
                 <div class="back_to_top text-center">
-                <a href="index.php">TOPに戻る</a>
+
+                    <form name="Logout" method="post" action="./../login/logout.php">
+                        <input type="submit" value="TOPに戻る">TOPに戻る
+                    </form>
             </section>
         </main>
 
