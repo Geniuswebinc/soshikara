@@ -1,3 +1,16 @@
+<?php
+require_once dirname(__FILE__) .'./../data/require.php';
+// データベース接続のクラス
+$conn = new DbConn();
+
+$sql = 'SELECT * FROM pantrys p';
+$sql .= ' LEFT OUTER JOIN foods f';
+$sql .= ' ON p.foods_id = f.id';
+$sql .= ' WHERE p.updated_at is NULL';
+$pantrys = $conn->fetch($sql);
+var_dump($pantrys);
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
