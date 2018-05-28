@@ -2,7 +2,7 @@
 require_once dirname(__FILE__) .'./../login/login.php';
 require_once dirname(__FILE__) .'./../data/require.php';
 
-$name=$_SESSION['name'];
+$login_name=$_SESSION['name'];
 $id=$_SESSION['id'];
 
 $search_recipe=$_GET['search_recipe'];
@@ -14,7 +14,7 @@ $sql .= '   LEFT OUTER JOIN foods';
 $sql .= '   ON pantrys.foods_number=foods.id';
 $sql .= '   LEFT OUTER JOIN informations';
 $sql .= '   ON pantrys.informations_id=informations.id';
-$sql .= '   WHERE informations_name='.'"'.$name.'"';
+$sql .= '   WHERE informations_name='.'"'.$login_name.'"';
 
 $pantrys=$conn->fetch($sql);
 $foods = $conn->fetch($sql);
@@ -53,7 +53,7 @@ foreach ($foods as $val) {
 $image = array(
     "./../assets/images/tairy.cmt.png",
     "./../assets/images/shonon.cmt.png",
-    "./../assets/images/god.png",
+    "./../assets/images/god.cmt.png",
 );
 $image = $image[rand(0, count($image)-1)];
 
@@ -86,31 +86,7 @@ $image = $image[rand(0, count($image)-1)];
 </head>
 <body>
     <header>
-        <div class="row top-header">
-            <div class="col-xs-6 top-img text-left">
-                <img src="./../../assets/img/logo.png" width="250">
-            </div>
-            <div class="col-xs-6 top-login text-right">
-                <a href="">お問い合わせはこちら</a>
-
-
-                <p class="msg">ログイン中 <?php echo $name;?>さん</p>
-                <form name="Logout" method="post" action="./../login/logout.php">
-                    <input type="submit" value="Logout" class="btn btn-success btn-sm logoutbtn">
-                </form>
-
-            </div>
-        </div>
-
-        <div class="row mt_10">
-            <ul class="nav nav-justified bg_orange">
-                <li role="presentation" class="active"><a href="#">HOME</a></li>
-                <li role="presentation"><a href="#">登録・一覧</a></li>
-                <li role="presentation"><a href="#">栄養バランス</a></li>
-                <li role="presentation"><a href="#">旬の食材</a></li>
-                <li role="presentation"><a href="#">キャラクター</a></li>
-            </ul>
-        </div>
+        <?php require_once dirname(__FILE__) .'./../include/header.php';?>
     </header>
 
     <section class="container">
@@ -230,7 +206,7 @@ $image = $image[rand(0, count($image)-1)];
     </section>
 
     <footer class="text-center">
-        <p>©︎Pistachio, Inc.</p>
+        <?php require_once dirname(__FILE__) .'./../include/footer.php';?>
     </footer>
 
 
