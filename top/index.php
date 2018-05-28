@@ -1,29 +1,61 @@
 <?php
-    require_once dirname(__FILE__) .'./../data/require.php';
+require_once dirname(__FILE__) .'./../login/login.php';
+require_once dirname(__FILE__) .'./../data/require.php';
 
-    $login_mail=$_GET['login_mail'];
-    $login_pass=$_GET['login_pass'];
+$name=$_SESSION['name'];
+$id=$_SESSION['id'];
 
-    $search_recipe=$_GET['search_recipe'];
+$search_recipe=$_GET['search_recipe'];
 
-    $conn = new DbConn();
+$conn = new DbConn();
 
-    $sql  = 'SELECT * FROM pantrys';
-    $sql .= '   LEFT OUTER JOIN foods';
-    $sql .= '   ON pantrys.foods_number=foods.id';
-    $sql .= '   LEFT OUTER JOIN informations';
-    $sql .= '   ON pantrys.informations_id=informations.id';
+$sql  = 'SELECT * FROM pantrys';
+$sql .= '   LEFT OUTER JOIN foods';
+$sql .= '   ON pantrys.foods_number=foods.id';
+$sql .= '   LEFT OUTER JOIN informations';
+$sql .= '   ON pantrys.informations_id=informations.id';
+$sql .= '   WHERE informations_name='.'"'.$name.'"';
 
-    if($login_mail){
-        $sql  = ' SELECT * FROM informations';
-        $sql .= '   WHERE infsormations_mail="'.$login_mail.'"';
-    }
+$pantrys=$conn->fetch($sql);
+$foods = $conn->fetch($sql);
+$consumed = $conn->fetch($sql);
+$sql  = 'SELECT ';
+$sql .= ' COUNT(CASE WHEN T1.nutrients=1 THEN 1  END) as cnt1,';
+$sql .= ' COUNT(CASE WHEN T1.nutrients=2 THEN 1  END) as cnt2,';
+$sql .= ' COUNT(CASE WHEN T1.nutrients=3 THEN 1  END) as cnt3,';
+$sql .= ' COUNT(CASE WHEN T1.nutrients=4 THEN 1  END) as cnt4,';
+$sql .= ' COUNT(CASE WHEN T1.nutrients=5 THEN 1  END) as cnt5,';
+$sql .= ' COUNT(CASE WHEN T1.nutrients=6 THEN 1  END) as cnt6';
+$sql .= ' FROM ( ';
+$sql .= ' SELECT foods_name,nutrients,eat_at,informations_id ';
+$sql .= ' FROM foods ';
+$sql .= ' INNER JOIN pantrys ON foods.id = pantrys.foods_id ';
+$sql .= ' INNER JOIN consumed ON pantrys.id = consumed.pantrys_id ';
+$sql .= ' WHERE DATE(eat_at)  = DATE(now()) && informations_id = '.'"'.$informations_id.'"';
+$sql .= ' GROUP BY foods.number ';
+$sql .= ' ) AS T1';
 
-    $conn->fetch($sql);
 
-    var_dump($informations);
-    var_dump($pantrys);
-    var_dump($sql);
+foreach ($foods as $val) {
+    $today01 = $val['cnt1'] / 5 * 100;
+    $today02 = $val['cnt2'] / 3 * 100;
+    $today03 = $val['cnt3'] / 5 * 100;
+    $today04 = $val['cnt4'] / 7 * 100;
+    $today05 = $val['cnt5'] / 4 * 100;
+    $today06 = $val['cnt6'] / 3 * 100;
+};
+
+//var_dump($informations);
+//var_dump($pantrys);
+//var_dump($sql);
+//var_dump($_SESSION);
+
+$image = array(
+    "./../assets/images/tairy.cmt.png",
+    "./../assets/images/shonon.cmt.png",
+    "./../assets/images/god.png",
+);
+$image = $image[rand(0, count($image)-1)];
 
 ?>
 
@@ -62,10 +94,10 @@
                 <a href="">お問い合わせはこちら</a>
 
 
-                    <p class="msg">ログイン中 <?php echo $val[informations_name];?>さん</p>
-                    <form name="Logout" method="post" action="/cgi-bin/Logout.cgi">
-                        <input type="submit" value="Logout" class="btn btn-success btn-sm">
-                    </form>
+                <p class="msg">ログイン中 <?php echo $name;?>さん</p>
+                <form name="Logout" method="post" action="./../login/logout.php">
+                    <input type="submit" value="Logout" class="btn btn-success btn-sm logoutbtn">
+                </form>
 
             </div>
         </div>
@@ -127,51 +159,71 @@
                     <h6>今日</h6>
                     <div class="limit-food">
                         <?php foreach($pantrys as $val){
-                            echo $val[foods_name];
+                            $now=date('Y-m-d');
+                            $daydiff = (strtotime($val[limit_date])-strtotime($now))/(3600*24);
+                            if($daydiff==0){
+                                echo '<li><a href="https://www.bob-an.com/recipes/search/SF.search_type:1/SF.query:'.$val[foods_name].'">'.$val[foods_name].'</a></li>';
+                            }
                         }?>
-                        <li><a href="#">おこめ</a></li>
-                        <li><a href="#">おにぎり</a></li>
-                        <li><a href="#">おむずび</a></li>
-                        <li><a href="#">白米</a></li>
-                        <li><a href="#">玄米</a></li>
-                        <li><a href="#">雑穀米</a></li>
-                        <li><a href="#">おかゆ</a></li>
                     </div>
                 </div>
                 <div class="col-xs-4 limit limit-center">
                     <h6>1日前</h6>
                     <div class="limit-food">
-
-                        <li><a href="#">おにく</a></li>
-                        <li><a href="#">牛肉</a></li>
-                        <li><a href="#">豚肉</a></li>
-                        <li><a href="#">鶏肉</a></li>
-                        <li><a href="#">チキン</a></li>
-                        <li><a href="#">ささみ</a></li>
-                        <li><a href="#">あぶらみ</a></li>
+                        <?php foreach($pantrys as $val){
+                            $now=date('Y-m-d');
+                            $daydiff = (strtotime($val[limit_date])-strtotime($now))/(3600*24);
+                            if($daydiff==1){
+                                echo '<li><a href="https://www.bob-an.com/recipes/search/SF.search_type:1/SF.query:'.$val[foods_name].'">'.$val[foods_name].'</a></li>';
+                            }
+                        }?>
                     </div>
                 </div>
-                <div class="col-xs-4 limit">
+                <div class="col-xs-8 limit">
                     <h6>2日前</h6>
                     <div class="limit-food">
-                        <li><a href="#">あいす</a></li>
-                        <li><a href="#">チョコレート</a></li>
-                        <li><a href="#">飴</a></li>
-                        <li><a href="#">クッキー</a></li>
-                        <li><a href="#">ポテトチップス</a></li>
-                        <li><a href="#">柿の種</a></li>
-                        <li><a href="#">ピスタチオ</a></li>
+                        <?php foreach($pantrys as $val){
+                            $now=date('Y-m-d');
+                            $daydiff = (strtotime($val[limit_date])-strtotime($now))/(3600*24);
+                            if($daydiff==2){
+                                echo '<li><a href="https://www.bob-an.com/recipes/search/SF.search_type:1/SF.query:'.$val[foods_name].'">'.$val[foods_name].'</a></li>';
+                            }
+                        }?>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row balance">
-            <div class="col-xs-6 data">
-                <div class="sumple-size"><h2>ここにパラグラフを表示</h2></div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="intab">
+                    <div class="row">
+                        <div class="chart">
+                            <canvas id="graph" width="250px" height="250px"></canvas>
+                        </div>
+
+                        <script type="text/javascript">
+                        document.getElementById("view_today").innerHTML = getToday();
+
+                        function getToday() {
+                            var now = new Date();
+                            var mon = now.getMonth()+1;
+                            var day = now.getDate();
+                            var you = now.getDay();
+
+                            var youbi = new Array("日","月","火","水","木","金","土");
+
+                            var s = mon + "月" + day + "日 (" + youbi[you] + ")";
+                            return s;
+                        }
+                        </script>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-6 tairi">
-                <div class="sumple-size"><h2>ここにタイリーを表示</h2></div>
+            <div class="col-xs-6">
+                <div class="chara-show">
+                    <?php echo '<img src="'.$image.'" alt="" width="100%">';?>
+                </div>
             </div>
         </div>
 
@@ -185,5 +237,80 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- <script type="text/javascript" src="./../assets/js/chart.php"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+
+    <!-- 今日 -->
+    <script>
+    $(function(){
+
+        var drawGraph = function(data){
+            var ctx = document.getElementById('graph').getContext('2d');
+            // データ1
+            var data1 = {
+                label:'今日 (%)',
+                data:data[1],
+                backgroundColor: "rgba(250, 50, 50, 0.3)",
+                borderColor: "rgba(200, 50, 50, 0.3)",
+                pointHoverBackgroundColor: "rgba(200, 50, 50, 0.3)",
+                pointHoverBorderColor: "rgba(200, 50, 50, 0.3)",
+            };
+            // データ2
+            var data2 = {
+                label:'昨日 (%)',
+                data:data[2],
+                backgroundColor: "rgba(50, 50, 250, 0.3)",
+                borderColor: "rgba(50, 50, 200, 0.3)",
+                pointHoverBackgroundColor: "rgba(50, 50, 200, 0.3)",
+                pointHoverBorderColor: "rgba(50, 50, 200, 0.3)",
+            }
+            // ラベル(横軸)
+            var label = data[0];
+
+            // データの設定
+            var config = {
+                type: 'radar', // グラフの種類（レーダーチャートを指定）
+                data: { labels: label, datasets: [data1, data2]},
+
+
+                options: {
+                    legend: {
+                        position: 'left',
+                    },
+                    // レスポンシブ指定
+                    responsive: true,
+                    scale: {
+                        pointLabels: {
+                            fontSize: 15,
+                        },
+                        ticks: {
+                            stepSize: 10,
+                            // 最小値の値を0指定
+                            beginAtZero:true,
+                            min: 0,
+                            // 最大値を指定
+                            max: 100,
+                        }
+                    }
+                }
+            }
+
+            var myChartGraph = new Chart(ctx, config);
+
+        };
+
+        var data = [['１群', '２群', '３群', '４群', '５群','６群'],
+        [<?php echo $today01; ?>, <?php echo $today02; ?>, <?php echo $today03; ?>, <?php echo $today04; ?>, <?php echo $today05; ?>, <?php echo $today06; ?> ],
+        [<?php echo $yesterday01; ?>, <?php echo $yesterday02; ?>, <?php echo $yesterday03; ?>, <?php echo $yesterday04; ?>, <?php echo $yesterday05; ?>, <?php echo $yesterday06; ?> ]]
+        drawGraph(data);
+        // window.onload=function () {
+        // };
+    })
+
+</script>
 </body>
 </html>
