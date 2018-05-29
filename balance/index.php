@@ -407,7 +407,7 @@
 
                                                 var endday = now.getDate() - 29;
 
-                                                if(endday < 0) {
+                                                if(endday <= 0) {
                                                     if(mon == 1) {
                                                         var now = new Date();
                                                         var mon = now.getMonth() + 1;
