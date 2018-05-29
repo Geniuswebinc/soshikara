@@ -1,3 +1,11 @@
+<?php
+    require_once dirname(__FILE__) .'./../login/login.php';
+
+    $informations_id = $_SESSION['id'];
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
