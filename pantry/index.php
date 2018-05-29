@@ -7,7 +7,6 @@ require_once dirname(__FILE__) .'./../login/login.php';
 // データベース接続のクラス
 $conn = new DbConn();
 
-echo $_POST['search_name'];
 
 // 食材登録
 if ($_POST['name']) {
