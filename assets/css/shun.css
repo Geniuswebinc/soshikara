@@ -18,7 +18,7 @@
     transform: scale(1.2);
 }
 
-.shun td {
+.shun .main_img td {
     border: 1px solid #989898;
     padding: 20px 50px;
 }
@@ -30,4 +30,17 @@
     position: absolute;
     top: 30px;
     color: #989898;
+}
+
+.syokuzai th {
+    width: 35px;
+}
+
+.syokuzai img {
+    width: 100%;
+}
+
+.syokuzai td {
+    font-size: 25px;
+    padding: 5px;
 }

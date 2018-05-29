@@ -1,15 +1,37 @@
 <?php
+require_once dirname(__FILE__) .'./../login/login.php';
 require_once dirname(__FILE__) .'./../data/require.php';
+
+$login_name=$_SESSION['name'];
+$informations_id = $_SESSION['id'];
 // データベース接続のクラス
 $conn = new DbConn();
 
 $sql = 'SELECT * FROM pantrys p';
 $sql .= ' LEFT OUTER JOIN foods f';
 $sql .= ' ON p.foods_id = f.id';
-$sql .= ' WHERE p.updated_at is NULL';
+$sql .= ' WHERE informations_id = '.'"'.$informations_id.'"';
 $pantrys = $conn->fetch($sql);
-var_dump($pantrys);
+
+// var_dump($pantrys);
+
+$pantrys_number_array = array();
+foreach ($pantrys as $val){
+    $pantrys_number_array[] = $val['number'];
+}
+
+
+foreach ($pantrys as $val) {
+    $number = $val['number'];
+};
+
+$kaisan = './../assets/images/kaisan.png';
+
+// var_dump($pantrys);
+// var_dump($number);
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -37,28 +59,16 @@ var_dump($pantrys);
     <![endif]-->
 </head>
 <body >
-    <header>
-        <div class="row">
-            <img src="./../assets/images/logo.png" width="250" style="padding-left: 10px;">
-        </div>
-        <div class="row mt_10">
-            <ul class="nav nav-justified bg_orange">
-                <li role="presentation" class="active"><a href="#">HOME</a></li>
-                <li role="presentation"><a href="#">登録・一覧</a></li>
-                <li role="presentation"><a href="#">栄養バランス</a></li>
-                <li role="presentation"><a href="#">旬の食材</a></li>
-                <li role="presentation"><a href="#">キャラクター</a></li>
-            </ul>
-        </div>
-
-    </header>
+    <?php
+        require_once dirname(__FILE__) .'./../include/header.php';
+    ?>
 
     <section class="shun">
         <h1 class="pl_10">旬の食材</h1>
 
         <div class="container">
             <div>
-                <table class="bg_white">
+                <table class="bg_white main_img">
                     <tr>
                         <td class="p_50 relative">
                             <label class="absolute"><h3>春</h3></label>
@@ -90,119 +100,228 @@ var_dump($pantrys);
                 </table>
             </div>
 
-            <div class="row">
+            <div class="row list">
                 <h2>◯春</h2>
                 <div class="col-xs-4" id="spring">
-                    <ul>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:いちご" target="_blank">いちご</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:さやえんどう" target="_blank">さやえんどう</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:しいたけ" target="_blank">しいたけ</a></li>
-                    </ul>
+                    <table class="syokuzai">
+                        <tr>
+                            <th><?php if(in_array(1, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:いちご" target="_blank" value="1">いちご</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(2, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                        <td><a href="https://www.bob-an.com/recipes/search/SF.query:さやえんどう" target="_blank">さやえんどう</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(3, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:しいたけ" target="_blank">しいたけ</a></li>
+                        </tr>
+                    </table>
                 </div>
 
-                <div class="col-xs-4" id="summer">
-                    <ul>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:じゃがいも" target="_blank">じゃがいも</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:そら豆" target="_blank">そら豆</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:たけのこ" target="_blank">たけのこ</a></li>
-                    </ul>
+                <div class="col-xs-4">
+                    <table class="syokuzai">
+                        <tr>
+                            <th><?php if(in_array(4, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:じゃがいも" target="_blank">じゃがいも</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(5, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:そら豆" target="_blank">そら豆</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(6, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:たけのこ" target="_blank">たけのこ</a></td>
+                        </tr>
+                    </table>
                 </div>
 
-                <div class="col-xs-4" id="autumn">
-                    <ul>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:玉ねぎ" target="_blank">玉ねぎ</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:菜の花" target="_blank">菜の花</a></li>
-                    </ul>
+                <div class="col-xs-4">
+                    <table class="syokuzai">
+                        <tr>
+                            <th><?php if(in_array(7, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:玉ねぎ" target="_blank">玉ねぎ</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(8, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:菜の花" target="_blank">菜の花</a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row list">
                 <h2>◯夏</h2>
-                <div class="col-xs-4" id="winter">
-                    <ul>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:あじ" target="_blank">あじ</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:うなぎ" target="_blank">うなぎ</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:かぼちゃ" target="_blank">かぼちゃ</a></li>
-                    </ul>
+                <div class="col-xs-4" id="summer">
+                    <table class="syokuzai">
+                        <tr>
+                            <th><?php if(in_array(9, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:あじ" target="_blank">あじ</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(10, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:うなぎ" target="_blank">うなぎ</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(11, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:かぼちゃ" target="_blank">かぼちゃ</a></td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div class="col-xs-4">
-                    <ul>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:きゅうり" target="_blank">きゅうり</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:トマト" target="_blank">トマト</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:なし" target="_blank">なし</a></li>
-                    </ul>
+                    <table class="syokuzai">
+                        <tr>
+                            <th><?php if(in_array(12, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:きゅうり" target="_blank">きゅうり</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(13, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:トマト" target="_blank">トマト</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(14, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:なし" target="_blank">なし</a></td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div class="col-xs-4">
-                    <ul>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:なす" target="_blank">なす</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:ピーマン" target="_blank">ピーマン</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:ぶどう" target="_blank">ぶどう</a></li>
-                    </ul>
+                    <table class="syokuzai">
+                        <tr>
+                            <th><?php if(in_array(15, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:なす" target="_blank">なす</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(16, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:ピーマン" target="_blank">ピーマン</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(17, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:ぶどう" target="_blank">ぶどう</a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-            <div class="row">
+            <div class="row list">
                 <h2>◯秋</h2>
-                <div class="col-xs-4">
-                    <ul>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:柿" target="_blank">柿</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:栗" target="_blank">栗</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:鮭" target="_blank">鮭</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:さつまいも" target="_blank">さつまいも</a></li>
-                    </ul>
+                <div class="col-xs-4" id="autumn">
+                    <table class="syokuzai">
+                        <tr>
+                            <th><?php if(in_array(18, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:柿" target="_blank">柿</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(19, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:栗" target="_blank">栗</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(20, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:鮭" target="_blank">鮭</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(21, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:さつまいも" target="_blank">さつまいも</a></td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div class="col-xs-4">
-                    <ul>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:鯖" target="_blank">鯖</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:秋刀魚" target="_blank">秋刀魚</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:しいたけ" target="_blank">しいたけ</a></li>
-
-                    </ul>
+                    <table class="syokuzai">
+                        <tr>
+                            <th><?php if(in_array(22, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:鯖" target="_blank">鯖</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(23, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:秋刀魚" target="_blank">秋刀魚</a></td></tr>
+                        <tr>
+                            <th><?php if(in_array(4, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:しいたけ" target="_blank">しいたけ</a></td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div class="col-xs-4">
-                    <ul>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:じゃがいも" target="_blank">じゃがいも</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:人参" target="_blank">人参</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:りんご" target="_blank">りんご</a></li>
-                    </ul>
+                    <table class="syokuzai">
+                        <tr>
+                            <th><?php if(in_array(5, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:じゃがいも" target="_blank">じゃがいも</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(24, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:人参" target="_blank">人参</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(25, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:りんご" target="_blank">りんご</a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-            <div class="row">
+            <div class="row list">
                 <h2>◯冬</h2>
-                <div class="col-xs-4">
-                    <ul>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:キャベツ" target="_blank">キャベツ</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:鯛" target="_blank">鯛</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:大根" target="_blank">大根</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:ねぎ" target="_blank">ねぎ</a></li>
-                    </ul>
+                <div class="col-xs-4" id="winter">
+                    <table class="syokuzai">
+                        <tr>
+                            <th><?php if(in_array(26, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:キャベツ" target="_blank">キャベツ</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(27, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:鯛" target="_blank">鯛</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(28, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:大根" target="_blank">大根</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(29, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:ねぎ" target="_blank">ねぎ</a></td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div class="col-xs-4">
-                    <ul>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:白菜" target="_blank">白菜</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:鰤" target="_blank">鰤</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:ブロッコリー" target="_blank">ブロッコリー</a></li>
-                    </ul>
+                    <table class="syokuzai">
+                        <tr>
+                            <th><?php if(in_array(30, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:白菜" target="_blank">白菜</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(31, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:鰤" target="_blank">鰤</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(32, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:ブロッコリー" target="_blank">ブロッコリー</a></td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div class="col-xs-4">
-                    <ul>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:ほうれん草" target="_blank">ほうれん草</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:鮪" target="_blank">鮪</a></li>
-                        <li><a href="https://www.bob-an.com/recipes/search/SF.query:みかん" target="_blank">みかん</a></li>
-                    </ul>
+                    <table class="syokuzai">
+                        <tr>
+                            <th><?php if(in_array(33, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:ほうれん草" target="_blank">ほうれん草</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(34, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:鮪" target="_blank">鮪</a></td>
+                        </tr>
+                        <tr>
+                            <th><?php if(in_array(35, $pantrys_number_array)) echo "<img src=\"$kaisan\">"; ?></th>
+                            <td><a href="https://www.bob-an.com/recipes/search/SF.query:みかん" target="_blank">みかん</a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="text-center bg_orange">
-        <p>©️Pistachio, Inc.</p>
-    </footer>
+    <?php
+        require_once dirname(__FILE__) .'./../include/footer.php';
+    ?>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
