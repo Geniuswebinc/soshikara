@@ -1,0 +1,43 @@
+
+
+.login{
+    width:75%;
+    padding:30px 0px;
+    margin:0 auto;
+}
+
+.login h3{
+    font-size:24px;
+    color:#482802;
+    margin:0 0 30px;
+}
+
+.confirm {
+    margin-top: 20px;
+}
+
+
+.box{
+    border:1px solid #F6F5F0;
+    background-color:white;
+    margin-top: 60px;
+    text-align:left;
+    width:100%;
+}
+
+
+.form-group .txtbox {
+    margin: 20px;
+}
+
+
+body,
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
+}
