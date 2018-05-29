@@ -18,8 +18,8 @@ $sql .= '   WHERE informations_name='.'"'.$login_name.'"';
 
 $pantrys=$conn->fetch($sql);
 
-$foods = $conn->fetch($sql);
 $consumed = $conn->fetch($sql);
+
 $sql  = 'SELECT ';
 $sql .= ' COUNT(CASE WHEN T1.nutrients=1 THEN 1  END) as cnt1,';
 $sql .= ' COUNT(CASE WHEN T1.nutrients=2 THEN 1  END) as cnt2,';
@@ -32,10 +32,10 @@ $sql .= ' SELECT foods_name,nutrients,eat_at,informations_id ';
 $sql .= ' FROM foods ';
 $sql .= ' INNER JOIN pantrys ON foods.id = pantrys.foods_id ';
 $sql .= ' INNER JOIN consumed ON pantrys.id = consumed.pantrys_id ';
-$sql .= ' WHERE DATE(eat_at)  = DATE(now()) && informations_id = '.'"'.$informations_id.'"';
+$sql .= ' WHERE DATE(eat_at)  = DATE(now()) && informations_id = '.'"'.$id.'"';
 $sql .= ' GROUP BY foods.number ';
 $sql .= ' ) AS T1';
-
+$foods = $conn->fetch($sql);
 
 foreach ($foods as $val) {
     $today01 = $val['cnt1'] / 5 * 100;
