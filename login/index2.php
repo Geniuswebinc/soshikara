@@ -1,29 +1,20 @@
 <?php
-session_start();
-require_once dirname(__FILE__) .'./../data/require.php';
-$conn = new DbConn();
+    require_once dirname(__FILE__) .'./../data/require.php';
 
-$informations = array();
-if($_POST){
     $login_mail=$_POST['login_mail'];
     $login_pass=$_POST['login_pass'];
 
-    $sql  = ' SELECT informations_name, id FROM informations';
-    $sql .= '   WHERE informations_mail="'.$login_mail.'" AND password = "'.$login_pass .'"';
+    $conn = new DbConn();
+
+    if($login_mail){
+    $sql  = ' SELECT * FROM informations';
+    $sql .= '   WHERE informations_mail="'.$login_mail.'"';
+}
 
     $informations = $conn->fetch($sql);
 
-    if(count($informations) > 0){
-        $_SESSION['name'] = $informations[0]['informations_name'];
-        $_SESSION['id']=$informations[0]['id'];
-    }
-}
-
-if($_SESSION['id'] > 0) {
-    header('Location: ../top/');
-}
-
-//var_dump($_SESSION);
+    var_dump($informations);
+    var_dump($sql);
 
 
 ?>
@@ -63,14 +54,18 @@ if($_SESSION['id'] > 0) {
 
     <section class="container">
         <div class="row otoiawse text-center">
-            <div class="col-xs-12 text-center"><a class="btn btn-success" href="./../contact_form/index.php">お問い合わせはこちら</a></div>
+            <div class="col-xs-12 text-center"><a class="btn btn-success" href="">お問い合わせはこちら</a></div>
         </div>
 
         <div class="row login-container">
             <div class="box login">
                 <div class="login">
                     <h3>ログイン</h3>
-                    <form method="post" id="logingo" action="#">
+                    <form method="post" action="<?php foreach($informations as $val){
+                        if($val[password]==$login_pass){
+                            echo './../top/index.php';
+                        }
+                    } ?>">
                         <div class="form-group">
                             <label for="InputEmail">メールアドレス</label>
                             <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。" name="login_mail">
@@ -79,9 +74,7 @@ if($_SESSION['id'] > 0) {
                             <label for="InputPassword">パスワード</label>
                             <input type="password" class="form-control" id="InputPassword" placeholder="パスワードを入力して下さい。" name="login_pass">
                         </div>
-                        <div class="text-center">
-                            <input type="submit" value="ログイン" class="btn btn-success btn-sm">
-                        </div>
+                        <div class="text-center"><input type="submit" value="ログイン" class="btn btn-success"></div>
 
 
                     </form>
@@ -90,14 +83,36 @@ if($_SESSION['id'] > 0) {
         </div>
 
         <div class="row text-center toroku-link">
-            <a href="./../registration/index.php">会員登録はこちら（無料）</a>
+            <a href="./../regsration.php">会員登録はこちら（無料）</a>
         </div>
 
+        <div class="this-box-all">
+            <div class="row ttl">
+                <h4>このサイトについて</h4>
+            </div>
+            <div class="row this-contents">
+                <div class="col-xs-4 this-content">
+                    <div class="this-content-txt this-box">
+                        <p>冷蔵庫の中を管理できるよ！</p>
+                    </div>
+                </div>
+                <div class="col-xs-4 this-content">
+                    <div class="this-content-txt this-box">
+                        <p>栄養バランスを管理できるよ！</p>
+                    </div>
+                </div>
+                <div class="col-xs-4 this-content">
+                    <div class="this-content-txt this-box">
+                        <p>レシピ検索できるよ！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </section>
 
     <footer class="text-center">
-        <?php require_once dirname(__FILE__) .'./../include/footer.php';?>
+        <p>©︎Pistachio, Inc.</p>
     </footer>
 
 

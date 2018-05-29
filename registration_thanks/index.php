@@ -12,6 +12,7 @@
     $sql .= '   VALUES("'.$informations_mail.'","'.$password.'","'.$informations_name.'")';
     }
 
+
     $conn->execute($sql);
 
 ?>
@@ -63,7 +64,7 @@
     </section>
 
     <footer class="text-center">
-        <p>©︎Pistachio, Inc.</p>
+        <?php require_once dirname(__FILE__) .'./../include/footer.php';?>
     </footer>
 
     <!-- Latest compiled and minified JavaScript -->

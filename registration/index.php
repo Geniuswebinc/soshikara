@@ -45,15 +45,15 @@
                     <form method="post" action="./../../registration_thanks/index.php">
                         <div class="form-group">
                             <label for="InputEmail">メールアドレス</label>
-                            <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。" name="informations_mail">
+                            <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。" name="informations_mail" required>
                         </div>
                         <div class="form-group">
                             <label for="InputPassword">パスワード</label>
-                            <input type="password" class="form-control" id="InputPassword" placeholder="パスワードを入力して下さい。" name="password">
+                            <input type="password" class="form-control" id="InputPassword" placeholder="パスワードを入力して下さい。" name="password" required>
                         </div>
                         <div class="form-group">
                             <label for="InputName">ニックネーム</label>
-                            <input type="text" class="form-control" id="InputName" placeholder="ニックネームを入力して下さい。" name="informations_name">
+                            <input type="text" class="form-control" id="InputName" placeholder="ニックネームを入力して下さい。" name="informations_name" required>
                         </div>
                         <div class="text-center"><input type="submit" value="会員登録" class="btn btn-success"></div>
                     </form>
@@ -62,37 +62,13 @@
         </div>
 
         <div class="row text-center toroku-link">
-            <a href="">会員登録はこちら（無料）</a>
-        </div>
-
-        <div class="this-box-all">
-            <div class="row ttl">
-                <h4>このサイトについて</h4>
-            </div>
-            <div class="row this-contents">
-                <div class="col-xs-4 this-content">
-                    <div class="this-content-txt this-box">
-                        <p>冷蔵庫の中を管理できるよ！</p>
-                    </div>
-                </div>
-                <div class="col-xs-4 this-content">
-                    <div class="this-content-txt this-box">
-                        <p>栄養バランスを管理できるよ！</p>
-                    </div>
-                </div>
-                <div class="col-xs-4 this-content">
-                    <div class="this-content-txt this-box">
-                        <p>レシピ検索できるよ！</p>
-                    </div>
-                </div>
-            </div>
 
         </div>
 
     </section>
 
     <footer class="text-center">
-        <p>©︎Pistachio, Inc.</p>
+        <?php require_once dirname(__FILE__) .'./../include/footer.php';?>
     </footer>
 
 

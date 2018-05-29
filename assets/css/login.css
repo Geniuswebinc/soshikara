@@ -1,0 +1,46 @@
+
+.otoiawse{
+    margin:0px;
+    padding:60px 0px;
+}
+
+.login{
+    width:75%;
+    padding:30px 0px;
+    margin:0 auto;
+}
+
+.login h3{
+    font-size:24px;
+    color:#482802;
+    margin:0 0 30px;
+}
+
+.toroku-link{
+    margin:60px 0;
+}
+
+.this-box-all{
+    margin:30px 0px 120px;
+}
+
+.this-box{
+    width:240px;
+    height:240px;
+    border:1px solid #F6F5F0;
+    background-color:white;
+    border-radius:50%;
+    }
+
+.ttl{
+    margin:0 0 30px;
+}
+
+.ttl h4{
+    color:#482802;
+}
+
+.this-content-txt{
+    color:#482802;
+    margin:auto;
+}
