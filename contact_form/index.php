@@ -2,9 +2,7 @@
     session_start();
 
     $search_recipe = $_POST['search_recipe'];
-    echo $search_recipe;
 
-    var_dump($search_recipe);
 ?>
 
 <!DOCTYPE html>
