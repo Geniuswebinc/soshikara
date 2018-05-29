@@ -99,7 +99,7 @@ $image = $image[rand(0, count($image)-1)];
                     </div>
                     <form class="form-inline" method=post action="./../../pantry/index.php">
                         <div class="row seach-form">
-                            <input type="search"  name="search_food" class="col-xs-6 form-control input-sm" required>
+                            <input type="search"  name="search_name" class="col-xs-6 form-control input-sm" required>
                             <div class="col-xs-6 text-right btnstyl">
                                 <button type="submit" class="btn btn-success btn-sm btnhalf">検索</button>
                             </div>
@@ -155,7 +155,7 @@ $image = $image[rand(0, count($image)-1)];
                         }?>
                     </div>
                 </div>
-                <div class="col-xs-8 limit">
+                <div class="col-xs-4 limit">
                     <h6>2日前</h6>
                     <div class="limit-food">
                         <?php foreach($pantrys as $val){

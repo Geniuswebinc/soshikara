@@ -7,6 +7,8 @@ require_once dirname(__FILE__) .'./../login/login.php';
 // データベース接続のクラス
 $conn = new DbConn();
 
+echo $_POST['search_name'];
+
 // 食材登録
 if ($_POST['name']) {
     $name = $_POST['name'];
@@ -77,12 +79,17 @@ $sql = 'SELECT p.*, f.id as f_id, f.foods_name, f.nutrients, f.unit, f.number  F
 $sql .= ' LEFT OUTER JOIN foods f';
 $sql .= ' ON p.foods_id = f.id';
 $sql .= ' WHERE p.updated_at is NULL';
+if ($_POST['search_name']) {
+    $search_name = $_POST['search_name'];
+    $sql .= ' AND f.foods_name ="'.$search_name.'"';
+}
 if ($_POST['search_food']) {
     $number = $_POST['search_food'];
     $sql .= ' AND f.number ='.$number;
 }
 $sql .= ' ORDER BY p.pantrys_created_at DESC';
 $pantries = $conn->fetch($sql);
+
 
 //　消費済み取得
 $sql = 'SELECT *, c.id as c_id FROM consumed c';
