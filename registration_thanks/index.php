@@ -12,7 +12,7 @@
     $sql .= '   VALUES("'.$informations_mail.'","'.$password.'","'.$informations_name.'")';
     }
 
-    
+
     $conn->execute($sql);
 
 ?>

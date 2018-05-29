@@ -51,9 +51,9 @@ foreach ($foods as $val) {
 //var_dump($_SESSION);
 
 $image = array(
-    "./../assets/images/tairy.cmt.png",
-    "./../assets/images/shonon.cmt.png",
-    "./../assets/images/god.cmt.png",
+    "./../assets/images/tairy_cmt.png",
+    "./../assets/images/shonon_cmt.png",
+    "./../assets/images/god_cmt.png",
 );
 $image = $image[rand(0, count($image)-1)];
 
