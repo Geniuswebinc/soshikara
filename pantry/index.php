@@ -2,7 +2,7 @@
 require_once dirname(__FILE__) .'./../data/require.php';
 require_once dirname(__FILE__) .'./../login/login.php';
 
-
+$informations_id = $_SESSION['id'];
 
 // データベース接続のクラス
 $conn = new DbConn();
@@ -18,7 +18,7 @@ if ($_POST['name']) {
     $sql = 'INSERT INTO';
     $sql .= ' pantrys(pantrys_quantity, limit_date, foods_id, informations_id)';
     $sql .= ' VALUES ( ';
-    $sql .= "'".$quantity."','".$limit_date."','".$id."','1'";
+    $sql .= "'".$quantity."','".$limit_date."','".$id."','".$informations_id."'";
     $sql .= ' )';
     $conn->execute($sql);
 }
@@ -28,7 +28,7 @@ if ($_POST['consumed_quantity']) {
     $id = $_POST['pantrys_id'];
     $quantity = $_POST['consumed_quantity'];
     $sql = 'INSERT INTO';
-    $sql .= ' consumed(consumed_quantity, pantrys_id)';
+    $sql .= ' consumed(consumed_quantity, pantrys_id )';
     $sql .= ' VALUES (';
     $sql .= "'".$quantity."','".$id."'";
     $sql .= ' )';
@@ -77,7 +77,10 @@ $foods = $conn->fetch($sql);
 $sql = 'SELECT p.*, f.id as f_id, f.foods_name, f.nutrients, f.unit, f.number  FROM pantrys p';
 $sql .= ' LEFT OUTER JOIN foods f';
 $sql .= ' ON p.foods_id = f.id';
+$sql .= ' LEFT OUTER JOIN informations i';
+$sql .= ' ON i.id = p.informations_id';
 $sql .= ' WHERE p.updated_at is NULL';
+$sql .= ' AND p.informations_id ="'.$informations_id.'"';
 if ($_POST['search_name']) {
     $search_name = $_POST['search_name'];
     $sql .= ' AND f.foods_name ="'.$search_name.'"';
@@ -96,8 +99,12 @@ $sql .= ' LEFT OUTER JOIN pantrys p';
 $sql .= ' ON c.pantrys_id = p.id';
 $sql .= ' LEFT OUTER JOIN foods f';
 $sql .= ' ON p.foods_id = f.id';
+$sql .= ' LEFT OUTER JOIN informations i';
+$sql .= ' ON i.id = p.informations_id';
+$sql .= ' WHERE p.informations_id ="'.$informations_id.'"';
 $sql .= ' ORDER BY c.eat_at DESC';
 $consumeds = $conn->fetch($sql);
+
 
 // var_dump($sql);
 // var_dump($foods);
