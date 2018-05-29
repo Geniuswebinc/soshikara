@@ -11,12 +11,13 @@ $conn = new DbConn();
 
 $sql  = 'SELECT * FROM pantrys';
 $sql .= '   LEFT OUTER JOIN foods';
-$sql .= '   ON pantrys.foods_number=foods.id';
+$sql .= '   ON pantrys.foods_id=foods.id';
 $sql .= '   LEFT OUTER JOIN informations';
 $sql .= '   ON pantrys.informations_id=informations.id';
 $sql .= '   WHERE informations_name='.'"'.$login_name.'"';
 
 $pantrys=$conn->fetch($sql);
+
 $foods = $conn->fetch($sql);
 $consumed = $conn->fetch($sql);
 $sql  = 'SELECT ';
