@@ -1,0 +1,46 @@
+.scale {
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+}
+.scale img {
+    -moz-transition: -moz-transform 0.5s linear;
+    -webkit-transition: -webkit-transform 0.5s linear;
+    -o-transition: -o-transform 0.5s linear;
+    -ms-transition: -ms-transform 0.5s linear;
+    transition: transform 0.5s linear;
+}
+.scale img:hover {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.shun .main_img td {
+    border: 1px solid #989898;
+    padding: 20px 50px;
+}
+
+.relative {
+    position: relative;
+}
+.absolute {
+    position: absolute;
+    top: 30px;
+    color: #989898;
+}
+
+.syokuzai th {
+    width: 35px;
+}
+
+.syokuzai img {
+    width: 100%;
+}
+
+.syokuzai td {
+    font-size: 25px;
+    padding: 5px;
+}
