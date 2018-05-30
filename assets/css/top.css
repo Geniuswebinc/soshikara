@@ -1,0 +1,107 @@
+body{
+    color:#817E7E;
+}
+
+.logoutbtn{
+    margin-bottom:10px;
+}
+
+.search{
+    margin:60px 0 0 0;
+}
+
+.box{
+    border:1px solid #F6F5F0;
+    background-color:white;
+    margin:60px 30px 0px;
+}
+
+.seach-container{
+    padding:15px;
+    margin:0px;
+
+}
+
+.seach-container-top{
+    margin:0px;
+
+}
+
+.box h2{
+    font-size:18px;
+    color:#482802;
+    padding:0px;
+    margin:0px;
+}
+
+.btnhalf{
+    width:50%;
+}
+
+.btnstyl{
+    padding:0px;
+    margin:0px;
+    float: right;
+}
+
+.seach-form{
+    margin:20px 0 0 0;
+    padding:0px;
+}
+
+.limits{
+    margin:60px 15px;
+    padding:15px 0px;
+}
+
+.limits-ttl h5{
+    padding:0px;
+    margin:0px;
+    font-size:18px;
+    color:#482802;
+}
+
+.limit-cotainer{
+    margin:20px 0 0 0;
+}
+
+.limit-center{
+    border-right:1px solid #817E7E;
+    border-left:1px solid #817E7E;
+}
+
+ .balance{
+    margin-bottom:120px;
+ }
+
+.chara-show{
+    width:70%;
+}
+ /*balanceの㎝Ss*/
+
+ .taishokikan {
+     font-size: 30px;
+ }
+
+ .eiyouso {
+     position: relative;
+     right: 0px;
+     bottom: 0px;
+     margin-top: 100px;
+ }
+
+
+
+
+ .eiyounaiyou {
+     text-align: right;
+ }
+
+ .meyasu {
+     text-align: right;
+     font-size: 12px;
+ }
+
+ .num {
+     font-weight: bold;
+ }
