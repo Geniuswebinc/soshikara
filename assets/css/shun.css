@@ -9,6 +9,7 @@
     -o-transition: -o-transform 0.5s linear;
     -ms-transition: -ms-transform 0.5s linear;
     transition: transform 0.5s linear;
+    width: 400px;
 }
 .scale img:hover {
     -webkit-transform: scale(1.2);
@@ -22,6 +23,8 @@
     border: 1px solid #989898;
     padding: 20px 50px;
 }
+
+
 
 .relative {
     position: relative;
