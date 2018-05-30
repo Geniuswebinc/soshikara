@@ -56,11 +56,13 @@
                                 <div class="txtbox">
                                     <label class="control-label">メールアドレス</label>
                                     <p class="form-control-static"><?php echo $email; ?></p>
+                                    <input type="hidden" name="email" value="<?php echo $email; ?>">
                                 </div>
 
                                 <div class="txtbox">
                                     <label class="control-label">お問い合わせ内容</label>
                                     <p class="form-control-static"><?php echo $content; ?></p>
+                                    <input type="hidden" name="content" value="<?php echo $content; ?>">
                                 </div>
 
                                 <div class="row">
