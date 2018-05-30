@@ -41,7 +41,6 @@ if ($_POST['consumed_quantity']) {
          $sql .= ' SET pantrys_quantity = '.$diff;
          $sql .= ' WHERE id = '.$id;
          $conn->execute($sql);
-         var_dump($sql);
     } else if ($diff == 0) {
         $sql = 'UPDATE pantrys';
         $sql .= ' SET updated_at = CURRENT_TIMESTAMP';
