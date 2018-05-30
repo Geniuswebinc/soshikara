@@ -1,9 +1,16 @@
+<?php
+    session_start();
+
+    $search_recipe = $_POST['search_recipe'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> | そして空になった</title>
+    <title>お問い合わせ | そして空になった</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.0">
@@ -23,71 +30,47 @@
     <script src="/js/selectivizr-min.js"></script>
     <![endif]-->
 </head>
-<body >
-    <header>
-        <div class="row">
-            <img src="./../assets/images/logo.png" width="250" style="padding-left: 10px;">
-        </div>
-
-    </header>
-
-        <section class="container">
-            <div class="box">
-                <div class="login">
-                    <h3>お問い合わせ</h3>
-
-                    <form>
-                        <div class="form-group">
-                            <label for="InputName">お名前</label>
-                            <input type="user_name" class="form-control" id="InputName" placeholder="名前を入力して下さい。">
-                        </div>
-                        <div class="form-group">
-                            <label for="InputEmail">メールアドレス</label>
-                            <input type="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。">
-                        </div>
-                        <div class="from-group">
-                            <label for="InputTextarea">内容</label>
-                            <textarea class="form-control" name="content" id="InputTextarea" placeholder="内容を入力して下さい。"></textarea>
-                        </div>
-                        <div class="confirm text-center">
-                            <input type="submit" value="確認" class="btn btn-success">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-
-        <section class="container">
-            <div class="row toroku-link text-center">
-                <a href="">会員登録はこちら（無料）</a>
+<body>
+    <div id="wrapper">
+        <header>
+            <div class="row">
+                <img src="./../assets/images/logo.png" width="250" style="padding-left: 10px;">
             </div>
 
-            <div class="this-box-all">
-                <div class="row ttl">
-                    <h4>このサイトについて</h4>
-                </div>
-                <div class="row this-contents">
-                    <div class="col-xs-4 this-content">
-                        <div class="this-content-txt this-box">
-                            <p>冷蔵庫の中を管理できるよ！</p>
-                        </div>
-                    </div>
-                    <div class="col-xs-4 this-content">
-                        <div class="this-content-txt this-box">
-                            <p>栄養バランスを管理できるよ！</p>
-                        </div>
-                    </div>
-                    <div class="col-xs-4 this-content">
-                        <div class="this-content-txt this-box">
-                            <p>レシピ検索できるよ！</p>
-                        </div>
-                    </div>
-                </div>
+        </header>
 
-            </div>
+        <main>
 
-        </section>
+            <section class="container">
+                <div class="box">
+                    <div class="login">
+                        <h3>お問い合わせ</h3>
+
+                        <form action="./../contact_confirm/index.php" method="post">
+                            <div class="form-group">
+                                <div class="txtbox">
+                                    <label for="InputName">お名前</label>
+                                    <input type="user_name" name="name" class="form-control" id="InputName" placeholder="名前を入力して下さい。" required>
+                                </div>
+                                <div class="txtbox">
+                                    <label for="InputEmail">メールアドレス</label>
+                                    <input type="email" name="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。" required>
+                                </div>
+                                <div class="txtbox">
+                                    <label for="InputTextarea">内容</label>
+                                    <textarea class="form-control" name="content" id="InputTextarea" placeholder="内容を入力して下さい。" required></textarea>
+                                </div>
+                                <div class="confirm text-center">
+                                    <input type="submit" value="確認" class="btn btn-success" required>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+
 
 
         <footer class="text-center bg_orange">
@@ -95,7 +78,8 @@
         </footer>
 
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </div>
 </body>
 </html>
