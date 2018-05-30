@@ -209,22 +209,22 @@
                                             <div class="eiyouso col-sm-4">
                                                 <h5>1群</h5>
                                                 <p class="eiyounaiyou">筋肉や血、骨を作る良質タンパク質の供給源</p>
-                                                <p class="meyasu">1日の目安&nbsp;<span class="num">５品目</span></p>
+                                                <p class="meyasu">肉、卵、魚、大豆類&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="num">1日の目安&nbsp;５品目</span></p>
                                                 <h5>2群</h5>
                                                 <p class="eiyounaiyou">骨や歯を丈夫にするカルシウムの供給源</p>
-                                                <p class="meyasu">1日の目安&nbsp;<span class="num">３品目</span></p>
+                                                <p class="meyasu">牛乳、乳製品、小魚、海藻&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="num">1日の目安&nbsp;３品目</span></p>
                                                 <h5>3群</h5>
                                                 <p class="eiyounaiyou">皮膚や粘膜を保護するカロチンの供給</p>
-                                                <p class="meyasu">1日の目安&nbsp;<span class="num">５品目</span></p>
+                                                <p class="meyasu">緑黄色野菜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="num">1日の目安&nbsp;５品目</span></p>
                                                 <h5>4群</h5>
                                                 <p class="eiyounaiyou">体の機能を調節するビタミンCの供給</p>
-                                                <p class="meyasu">1日の目安&nbsp;<span class="num">７品目</span></p>
+                                                <p class="meyasu">第3群以外の野菜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="num">1日の目安&nbsp;７品目</span></p>
                                                 <h5>5群</h5>
                                                 <p class="eiyounaiyou">糖質性のエネルギー源</p>
-                                                <p class="meyasu">1日の目安&nbsp;<span class="num">４品目</span></p>
+                                                <p class="meyasu">ごはん、パン、麺類、いも類、砂糖類&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="num">1日の目安&nbsp;４品目</span></p>
                                                 <h5>6群</h5>
                                                 <p class="eiyounaiyou">脂肪性のエネルギー源</p>
-                                                <p class="meyasu">1日の目安&nbsp;<span class="num">３品目</span></p>
+                                                <p class="meyasu">油脂類、マヨネーズなど&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="num">1日の目安&nbsp;３品目</span></p>
                                             </div>
                                         </div>
                                     </div>
@@ -262,7 +262,7 @@
                                             <div class="eiyouso col-sm-4">
                                                 <h5>1群</h5>
                                                 <p class="eiyounaiyou">筋肉や血、骨を作る良質タンパク質の供給源</p>
-                                                <p class="meyasu">1日の目安&nbsp;<span class="num">５品目</span></p>
+                                                <p class="meyasu">　肉、卵、魚、大豆類1日の目安&nbsp;<span class="num">５品目</span></p>
                                                 <h5>2群</h5>
                                                 <p class="eiyounaiyou">骨や歯を丈夫にするカルシウムの供給源</p>
                                                 <p class="meyasu">1日の目安&nbsp;<span class="num">３品目</span></p>
@@ -294,7 +294,7 @@
 
                                                 var endday = now.getDate() - 6;
 
-                                                if(endday < 0) {
+                                                if(endday <= 0) {
                                                     if(mon == 1) {
                                                         var now = new Date();
                                                         var mon = now.getMonth() + 1;
@@ -374,10 +374,10 @@
                                             <div class="eiyouso col-sm-4">
                                                 <h5>1群</h5>
                                                 <p class="eiyounaiyou">筋肉や血、骨を作る良質タンパク質の供給源</p>
-                                                <p class="meyasu">1日の目安&nbsp;<span class="num">５品目</span></p>
+                                                <p class="meyasu">肉、卵、魚、大豆類&nbsp;&nbsp;1日の目安&nbsp;<span class="num">５品目</span></p>
                                                 <h5>2群</h5>
                                                 <p class="eiyounaiyou">骨や歯を丈夫にするカルシウムの供給源</p>
-                                                <p class="meyasu">1日の目安&nbsp;<span class="num">３品目</span></p>
+                                                <p class="meyasu"> 1日の目安&nbsp;<span class="num">３品目</span></p>
                                                 <h5>3群</h5>
                                                 <p class="eiyounaiyou">皮膚や粘膜を保護するカロチンの供給</p>
                                                 <p class="meyasu">1日の目安&nbsp;<span class="num">５品目</span></p>
