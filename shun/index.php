@@ -11,6 +11,7 @@ $sql = 'SELECT * FROM pantrys p';
 $sql .= ' LEFT OUTER JOIN foods f';
 $sql .= ' ON p.foods_id = f.id';
 $sql .= ' WHERE informations_id = '.'"'.$informations_id.'"';
+$sql .= ' AND updated_at is Null';
 $pantrys = $conn->fetch($sql);
 
 // var_dump($pantrys);
