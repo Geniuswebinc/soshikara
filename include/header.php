@@ -4,7 +4,7 @@
             <img src="./../assets/images/logo.png" width="250">
         </div>
         <div class="col-xs-6 top-login text-right">
-            <a href="">お問い合わせはこちら</a>
+            <a href="./../contact_form/">お問い合わせはこちら</a>
 
 
                 <p class="msg">ログイン中 <?php echo $login_name;?>さん</p>
@@ -21,7 +21,7 @@
             <li role="presentation"><a href="./../pantry/">登録・一覧</a></li>
             <li role="presentation"><a href="./../balance">栄養バランス</a></li>
             <li role="presentation"><a href="./../shun/">旬の食材</a></li>
-            <li role="presentation"><a href="#">キャラクター</a></li>
+            <li role="presentation"><a href="./../character">キャラクター</a></li>
         </ul>
     </div>
 </header>
