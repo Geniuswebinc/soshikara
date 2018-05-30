@@ -11,14 +11,15 @@ $conn = new DbConn();
 
 $sql  = 'SELECT * FROM pantrys';
 $sql .= '   LEFT OUTER JOIN foods';
-$sql .= '   ON pantrys.foods_number=foods.id';
+$sql .= '   ON pantrys.foods_id=foods.id';
 $sql .= '   LEFT OUTER JOIN informations';
 $sql .= '   ON pantrys.informations_id=informations.id';
 $sql .= '   WHERE informations_name='.'"'.$login_name.'"';
 
 $pantrys=$conn->fetch($sql);
-$foods = $conn->fetch($sql);
+
 $consumed = $conn->fetch($sql);
+
 $sql  = 'SELECT ';
 $sql .= ' COUNT(CASE WHEN T1.nutrients=1 THEN 1  END) as cnt1,';
 $sql .= ' COUNT(CASE WHEN T1.nutrients=2 THEN 1  END) as cnt2,';
@@ -31,10 +32,10 @@ $sql .= ' SELECT foods_name,nutrients,eat_at,informations_id ';
 $sql .= ' FROM foods ';
 $sql .= ' INNER JOIN pantrys ON foods.id = pantrys.foods_id ';
 $sql .= ' INNER JOIN consumed ON pantrys.id = consumed.pantrys_id ';
-$sql .= ' WHERE DATE(eat_at)  = DATE(now()) && informations_id = '.'"'.$informations_id.'"';
+$sql .= ' WHERE DATE(eat_at)  = DATE(now()) && informations_id = '.'"'.$id.'"';
 $sql .= ' GROUP BY foods.number ';
 $sql .= ' ) AS T1';
-
+$foods = $conn->fetch($sql);
 
 foreach ($foods as $val) {
     $today01 = $val['cnt1'] / 5 * 100;
@@ -99,7 +100,7 @@ $image = $image[rand(0, count($image)-1)];
                     </div>
                     <form class="form-inline" method=post action="./../../pantry/index.php">
                         <div class="row seach-form">
-                            <input type="search"  name="search_food" class="col-xs-6 form-control input-sm" required>
+                            <input type="search"  name="search_name" class="col-xs-6 form-control input-sm" required>
                             <div class="col-xs-6 text-right btnstyl">
                                 <button type="submit" class="btn btn-success btn-sm btnhalf">検索</button>
                             </div>
@@ -155,7 +156,7 @@ $image = $image[rand(0, count($image)-1)];
                         }?>
                     </div>
                 </div>
-                <div class="col-xs-8 limit">
+                <div class="col-xs-4 limit">
                     <h6>2日前</h6>
                     <div class="limit-food">
                         <?php foreach($pantrys as $val){
