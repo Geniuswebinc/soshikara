@@ -236,22 +236,14 @@ $image = $image[rand(0, count($image)-1)];
                 pointHoverBackgroundColor: "rgba(200, 50, 50, 0.3)",
                 pointHoverBorderColor: "rgba(200, 50, 50, 0.3)",
             };
-            // データ2
-            var data2 = {
-                label:'昨日 (%)',
-                data:data[2],
-                backgroundColor: "rgba(50, 50, 250, 0.3)",
-                borderColor: "rgba(50, 50, 200, 0.3)",
-                pointHoverBackgroundColor: "rgba(50, 50, 200, 0.3)",
-                pointHoverBorderColor: "rgba(50, 50, 200, 0.3)",
-            }
+
             // ラベル(横軸)
             var label = data[0];
 
             // データの設定
             var config = {
                 type: 'radar', // グラフの種類（レーダーチャートを指定）
-                data: { labels: label, datasets: [data1, data2]},
+                data: { labels: label, datasets: [data1]},
 
 
                 options: {
@@ -281,8 +273,7 @@ $image = $image[rand(0, count($image)-1)];
         };
 
         var data = [['１群', '２群', '３群', '４群', '５群','６群'],
-        [<?php echo $today01; ?>, <?php echo $today02; ?>, <?php echo $today03; ?>, <?php echo $today04; ?>, <?php echo $today05; ?>, <?php echo $today06; ?> ],
-        [<?php echo $yesterday01; ?>, <?php echo $yesterday02; ?>, <?php echo $yesterday03; ?>, <?php echo $yesterday04; ?>, <?php echo $yesterday05; ?>, <?php echo $yesterday06; ?> ]]
+        [<?php echo $today01; ?>, <?php echo $today02; ?>, <?php echo $today03; ?>, <?php echo $today04; ?>, <?php echo $today05; ?>, <?php echo $today06; ?> ]]
         drawGraph(data);
         // window.onload=function () {
         // };
