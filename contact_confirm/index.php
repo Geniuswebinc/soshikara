@@ -1,8 +1,8 @@
 <?php
     session_start();
-
-    $search_recipe = $_POST['search_recipe'];
-
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $content = $_POST['content'];
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>お問い合わせ | そして空になった</title>
+    <title>お問い合わせ内容の確認 | そして空になった</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.0">
@@ -19,7 +19,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link href="./../assets/css/common.css" rel="stylesheet" media="all">
-    <link href="./../assets/css/contact_form.css" rel="stylesheet" media="all">
+    <link href="./../assets/css/contact_confirm.css" rel="stylesheet" media="all">
     <!--[if IE 9]>
     <script src="/js/html5shiv.js"></script>
     <script src="/js/css3-mediaqueries.js"></script>
@@ -40,46 +40,55 @@
         </header>
 
         <main>
-
             <section class="container">
                 <div class="box">
                     <div class="login">
-                        <h3>お問い合わせ</h3>
+                        <h3>お問い合わせ内容の確認</h3>
 
-                        <form action="./../contact_confirm/index.php" method="post">
+                        <form action="./../contact_thanks/index.php" method="post">
                             <div class="form-group">
                                 <div class="txtbox">
-                                    <label for="InputName">お名前</label>
-                                    <input type="user_name" name="name" class="form-control" id="InputName" placeholder="名前を入力して下さい。" required>
+                                    <label class="control-label">お名前</label>
+                                    <p class="form-control-static"><?php echo $name; ?></p>
+                                    <input type="hidden" name="name" value="<?php echo $name; ?>">
                                 </div>
+
                                 <div class="txtbox">
-                                    <label for="InputEmail">メールアドレス</label>
-                                    <input type="email" name="email" class="form-control" id="InputEmail" placeholder="メールアドレスを入力して下さい。" required>
+                                    <label class="control-label">メールアドレス</label>
+                                    <p class="form-control-static"><?php echo $email; ?></p>
                                 </div>
+
                                 <div class="txtbox">
-                                    <label for="InputTextarea">内容</label>
-                                    <textarea class="form-control" name="content" id="InputTextarea" placeholder="内容を入力して下さい。" required></textarea>
+                                    <label class="control-label">お問い合わせ内容</label>
+                                    <p class="form-control-static"><?php echo $content; ?></p>
                                 </div>
-                                <div class="confirm text-center">
-                                    <input type="submit" value="確認" class="btn btn-success" required>
+
+                                <div class="row">
+                                    <div class="col-sm-offset-4 col-sm-2">
+                                        <button type="button" class="btn btn-default" onclick="history.back()">戻る</button>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <button type="submit" class="btn btn-primary btn-success">送信</button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </section>
         </main>
 
 
-
-
         <footer class="text-center bg_orange">
             <p>©️Pistachio, Inc.</p>
         </footer>
 
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </div>
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>
