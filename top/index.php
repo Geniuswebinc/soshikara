@@ -15,6 +15,7 @@ $sql .= '   ON pantrys.foods_id=foods.id';
 $sql .= '   LEFT OUTER JOIN informations';
 $sql .= '   ON pantrys.informations_id=informations.id';
 $sql .= '   WHERE informations_name='.'"'.$login_name.'"';
+$sql .= '   AND updated_at is NULL';
 
 $pantrys=$conn->fetch($sql);
 
